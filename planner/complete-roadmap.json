@@ -1,0 +1,819 @@
+{
+  "projectName": "TreeShopDroid - Complete Development Roadmap",
+  "nodes": [
+    {
+      "id": 1000,
+      "x": 500,
+      "y": 400,
+      "title": "TreeShopDroid",
+      "description": "Complete Android app for tree care business operations - Map-first approach",
+      "status": "in_progress",
+      "priority": "critical",
+      "tags": ["root", "android", "main-project"],
+      "notes": "Port of TreeShop iOS to Android\nTarget: Android 8.0+ (API 26+)\nKotlin + Jetpack Compose + Room + Maps\nOffline-first with cloud sync\n4-stage workflow system\nMap as primary interface",
+      "parentId": null,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1100,
+      "x": 200,
+      "y": 100,
+      "title": "Phase 1: Foundation",
+      "description": "Project setup, architecture, and core infrastructure",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["phase", "setup"],
+      "notes": "Weeks 1-2\nEstablish solid foundation for entire project\nSetup development environment\nDefine architecture patterns",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1101,
+      "x": 50,
+      "y": 50,
+      "title": "Android Studio Project",
+      "description": "Initialize new Android Studio project with Compose",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["setup"],
+      "notes": "- Create new project with Empty Activity\n- Min SDK: API 26 (Android 8.0)\n- Target SDK: Latest stable\n- Package: com.treeshoptech.android\n- Enable Jetpack Compose\n- Setup version catalog (libs.versions.toml)",
+      "parentId": 1100,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1102,
+      "x": 50,
+      "y": 150,
+      "title": "Gradle Configuration",
+      "description": "Setup build.gradle with all dependencies",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["setup", "gradle"],
+      "notes": "Dependencies:\n\nCore:\n- Kotlin 1.9+\n- Compose BOM 2024.02+\n- Material3\n- Activity Compose\n- Navigation Compose\n\nData:\n- Room 2.6+\n- DataStore Preferences\n- Kotlinx Serialization\n\nAsync:\n- Coroutines\n- Flow\n\nDI:\n- Hilt 2.48+\n\nNetwork:\n- Retrofit 2.9+\n- OkHttp 4.12+\n- Kotlinx Serialization Converter\n\nMaps:\n- Google Maps Compose 4.3+\n- Places SDK\n- Location Services\n\nImage:\n- Coil Compose\n\nTesting:\n- JUnit 4/5\n- Espresso\n- Compose UI Test",
+      "parentId": 1100,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1103,
+      "x": 50,
+      "y": 250,
+      "title": "Package Structure",
+      "description": "Organize project with clean architecture",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["architecture"],
+      "notes": "Structure:\n\ncom.treeshoptech.android/\n├── data/\n│   ├── local/\n│   │   ├── dao/\n│   │   ├── entity/\n│   │   └── database/\n│   ├── remote/\n│   │   ├── api/\n│   │   └── dto/\n│   ├── repository/\n│   └── mapper/\n├── domain/\n│   ├── model/\n│   ├── repository/\n│   └── usecase/\n├── ui/\n│   ├── screen/\n│   │   ├── map/\n│   │   ├── lead/\n│   │   ├── proposal/\n│   │   ├── workorder/\n│   │   └── invoice/\n│   ├── component/\n│   ├── theme/\n│   └── navigation/\n├── di/\n└── util/",
+      "parentId": 1100,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1104,
+      "x": 50,
+      "y": 350,
+      "title": "Hilt Dependency Injection",
+      "description": "Setup DI with Hilt modules",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["architecture", "di"],
+      "notes": "Modules:\n\n@Module @InstallIn(SingletonComponent::class)\n- DatabaseModule (Room)\n- NetworkModule (Retrofit, OkHttp)\n- RepositoryModule\n- DataStoreModule\n\n@Module @InstallIn(ViewModelComponent::class)\n- UseCaseModule\n\nSetup @HiltAndroidApp\nSetup @AndroidEntryPoint for activities/fragments",
+      "parentId": 1100,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1200,
+      "x": 200,
+      "y": 300,
+      "title": "Phase 2: Data Layer",
+      "description": "Room database, entities, DAOs, repositories",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["phase", "data"],
+      "notes": "Weeks 2-3\nImplement complete data persistence layer\nOffline-first architecture\nBased on iOS SwiftData models",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1201,
+      "x": 50,
+      "y": 450,
+      "title": "Room Database Setup",
+      "description": "Configure Room database with all tables",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["database"],
+      "notes": "@Database(\n  entities = [\n    LeadEntity::class,\n    UserEntity::class,\n    DrawingEntity::class,\n    ProposalEntity::class,\n    WorkOrderEntity::class,\n    InvoiceEntity::class,\n    TreeEntity::class,\n    CustomerEntity::class\n  ],\n  version = 1,\n  exportSchema = true\n)\nabstract class TreeShopDatabase : RoomDatabase()\n\nMigration strategy\nPrepopulate data if needed\nType converters for complex types",
+      "parentId": 1200,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1202,
+      "x": 50,
+      "y": 550,
+      "title": "Lead Entity (50+ fields)",
+      "description": "Primary business entity matching iOS LEAD.swift",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["database", "entity"],
+      "notes": "@Entity(tableName = \"leads\")\ndata class LeadEntity(\n  @PrimaryKey val id: String = UUID.randomUUID().toString(),\n  \n  // Customer Info\n  val customerName: String,\n  val customerEmail: String?,\n  val customerPhone: String?,\n  val customerAddress: String,\n  \n  // Location\n  val latitude: Double,\n  val longitude: Double,\n  val parcelId: String?,\n  \n  // Workflow\n  @ColumnInfo(defaultValue = \"LEAD\")\n  val workflowStage: WorkflowStage,\n  \n  // Service Details\n  val serviceTypes: List<ServiceType>,\n  val priority: Priority,\n  val estimatedValue: Double?,\n  \n  // Scheduling\n  val siteVisitDate: Long?,\n  val scheduledStartDate: Long?,\n  val scheduledEndDate: Long?,\n  \n  // Assignment\n  val assignedToId: String?,\n  val crewIds: List<String>,\n  \n  // Follow-up\n  val followUpDate: Long?,\n  val followUpNotes: String?,\n  val contactAttempts: Int = 0,\n  val lastContactDate: Long?,\n  \n  // Status\n  val isArchived: Boolean = false,\n  val isFlagged: Boolean = false,\n  \n  // Timestamps\n  val createdAt: Long = System.currentTimeMillis(),\n  val updatedAt: Long = System.currentTimeMillis(),\n  val completedAt: Long?\n)\n\nPlus 20+ more fields from iOS version",
+      "parentId": 1200,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1203,
+      "x": 50,
+      "y": 650,
+      "title": "DAOs (Data Access Objects)",
+      "description": "Room DAOs for all entities",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["database", "dao"],
+      "notes": "@Dao\ninterface LeadDao {\n  @Query(\"SELECT * FROM leads WHERE isArchived = 0\")\n  fun getAllLeadsFlow(): Flow<List<LeadEntity>>\n  \n  @Query(\"SELECT * FROM leads WHERE workflowStage = :stage\")\n  fun getLeadsByStageFlow(stage: WorkflowStage): Flow<List<LeadEntity>>\n  \n  @Query(\"SELECT * FROM leads WHERE id = :id\")\n  suspend fun getLeadById(id: String): LeadEntity?\n  \n  @Insert(onConflict = OnConflictStrategy.REPLACE)\n  suspend fun insertLead(lead: LeadEntity)\n  \n  @Update\n  suspend fun updateLead(lead: LeadEntity)\n  \n  @Delete\n  suspend fun deleteLead(lead: LeadEntity)\n  \n  @Query(\"UPDATE leads SET workflowStage = :stage WHERE id = :id\")\n  suspend fun updateWorkflowStage(id: String, stage: WorkflowStage)\n}\n\nSimilar DAOs for all entities",
+      "parentId": 1200,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1204,
+      "x": 50,
+      "y": 750,
+      "title": "Repository Pattern",
+      "description": "Repositories for data access abstraction",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["architecture", "repository"],
+      "notes": "interface LeadRepository {\n  fun getAllLeads(): Flow<List<Lead>>\n  fun getLeadsByStage(stage: WorkflowStage): Flow<List<Lead>>\n  suspend fun getLeadById(id: String): Lead?\n  suspend fun createLead(lead: Lead): Result<Lead>\n  suspend fun updateLead(lead: Lead): Result<Lead>\n  suspend fun deleteLead(id: String): Result<Unit>\n  suspend fun updateWorkflowStage(id: String, stage: WorkflowStage): Result<Unit>\n  suspend fun syncLeads(): Result<Unit>\n}\n\nclass LeadRepositoryImpl @Inject constructor(\n  private val leadDao: LeadDao,\n  private val leadApi: LeadApi,\n  private val mapper: LeadMapper\n) : LeadRepository",
+      "parentId": 1200,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1300,
+      "x": 500,
+      "y": 100,
+      "title": "Phase 3: UI Theme",
+      "description": "Material 3 theme matching iOS design",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["phase", "ui"],
+      "notes": "Week 3\nCreate complete design system\nDark mode first\nMatch iOS visual style",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1301,
+      "x": 350,
+      "y": 50,
+      "title": "Color System",
+      "description": "Define all workflow and UI colors",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["ui", "theme"],
+      "notes": "Workflow Colors:\nval LeadBlue = Color(0xFF2196F3)\nval ProposalOrange = Color(0xFFFF9800)\nval WorkOrderGreen = Color(0xFF4CAF50)\nval InvoiceRed = Color(0xFFF44336)\nval CompletedGray = Color(0xFF9E9E9E)\n\nBackground:\nval BackgroundDark = Color(0xFF121212)\nval SurfaceDark = Color(0xFF1E1E1E)\nval Surface2Dark = Color(0xFF2C2C2C)\n\nText:\nval TextPrimary = Color(0xFFFFFFFF)\nval TextSecondary = Color(0xFFB3B3B3)\nval TextDisabled = Color(0xFF666666)\n\nSemantic:\nval Success = Color(0xFF4CAF50)\nval Warning = Color(0xFFFFC107)\nval Error = Color(0xFFF44336)\nval Info = Color(0xFF2196F3)",
+      "parentId": 1300,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1302,
+      "x": 350,
+      "y": 150,
+      "title": "Typography System",
+      "description": "Define text styles and font family",
+      "status": "pending",
+      "priority": "medium",
+      "tags": ["ui", "theme"],
+      "notes": "val Typography = Typography(\n  displayLarge = TextStyle(\n    fontFamily = FontFamily.SansSerif,\n    fontWeight = FontWeight.Bold,\n    fontSize = 57.sp\n  ),\n  headlineLarge = TextStyle(\n    fontWeight = FontWeight.SemiBold,\n    fontSize = 32.sp\n  ),\n  titleLarge = TextStyle(\n    fontWeight = FontWeight.SemiBold,\n    fontSize = 22.sp\n  ),\n  bodyLarge = TextStyle(\n    fontWeight = FontWeight.Normal,\n    fontSize = 16.sp\n  ),\n  labelLarge = TextStyle(\n    fontWeight = FontWeight.Medium,\n    fontSize = 14.sp\n  )\n)",
+      "parentId": 1300,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1303,
+      "x": 350,
+      "y": 250,
+      "title": "Component Shapes",
+      "description": "Define shape system for consistency",
+      "status": "pending",
+      "priority": "medium",
+      "tags": ["ui", "theme"],
+      "notes": "val Shapes = Shapes(\n  small = RoundedCornerShape(8.dp),\n  medium = RoundedCornerShape(12.dp),\n  large = RoundedCornerShape(16.dp)\n)\n\nCard shapes\nButton shapes\nTextField shapes\nDialog shapes",
+      "parentId": 1300,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1400,
+      "x": 500,
+      "y": 300,
+      "title": "Phase 4: Reusable Components",
+      "description": "Build component library matching iOS",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["phase", "ui"],
+      "notes": "Week 4\nCreate all reusable UI components\nConsistent design language\nAccessible and testable",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1401,
+      "x": 350,
+      "y": 350,
+      "title": "Status Badge Component",
+      "description": "Colored badges for workflow stages",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["ui", "component"],
+      "notes": "@Composable\nfun WorkflowBadge(\n  stage: WorkflowStage,\n  modifier: Modifier = Modifier\n) {\n  val (color, text) = when(stage) {\n    WorkflowStage.LEAD -> LeadBlue to \"Lead\"\n    WorkflowStage.PROPOSAL -> ProposalOrange to \"Proposal\"\n    WorkflowStage.WORK_ORDER -> WorkOrderGreen to \"Work Order\"\n    WorkflowStage.INVOICE -> InvoiceRed to \"Invoice\"\n    WorkflowStage.COMPLETED -> CompletedGray to \"Completed\"\n  }\n  \n  Surface(\n    modifier = modifier,\n    shape = RoundedCornerShape(12.dp),\n    color = color\n  ) {\n    Text(\n      text = text,\n      modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)\n    )\n  }\n}",
+      "parentId": 1400,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1402,
+      "x": 350,
+      "y": 450,
+      "title": "Custom Buttons",
+      "description": "Primary, secondary, icon buttons",
+      "status": "pending",
+      "priority": "medium",
+      "tags": ["ui", "component"],
+      "notes": "@Composable\nfun TreeShopButton(\n  text: String,\n  onClick: () -> Unit,\n  modifier: Modifier = Modifier,\n  enabled: Boolean = true,\n  variant: ButtonVariant = ButtonVariant.Primary,\n  leadingIcon: ImageVector? = null\n)\n\nVariants:\n- Primary (filled, accent color)\n- Secondary (outlined)\n- Text (text only)\n- Icon (icon button)",
+      "parentId": 1400,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1403,
+      "x": 350,
+      "y": 550,
+      "title": "Form Fields",
+      "description": "Text fields, dropdowns, date pickers",
+      "status": "pending",
+      "priority": "medium",
+      "tags": ["ui", "component"],
+      "notes": "@Composable\nfun TreeShopTextField(\n  value: String,\n  onValueChange: (String) -> Unit,\n  label: String,\n  modifier: Modifier = Modifier,\n  isError: Boolean = false,\n  errorMessage: String? = null,\n  leadingIcon: ImageVector? = null,\n  trailingIcon: ImageVector? = null,\n  keyboardType: KeyboardType = KeyboardType.Text\n)\n\n@Composable\nfun TreeShopDropdown(...)\n\n@Composable\nfun TreeShopDatePicker(...)",
+      "parentId": 1400,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1404,
+      "x": 350,
+      "y": 650,
+      "title": "Lead Card Component",
+      "description": "Card showing lead summary on map/list",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["ui", "component"],
+      "notes": "@Composable\nfun LeadCard(\n  lead: Lead,\n  onClick: () -> Unit,\n  modifier: Modifier = Modifier\n) {\n  Card(modifier = modifier.clickable(onClick = onClick)) {\n    Column(Modifier.padding(16.dp)) {\n      // Customer name\n      Text(lead.customerName, style = MaterialTheme.typography.titleMedium)\n      \n      // Address\n      Text(lead.address, style = MaterialTheme.typography.bodySmall)\n      \n      // Workflow badge\n      WorkflowBadge(lead.workflowStage)\n      \n      // Service types\n      ServiceTypeChips(lead.serviceTypes)\n      \n      // Value estimate\n      if (lead.estimatedValue != null) {\n        Text(\"$$${lead.estimatedValue}\")\n      }\n    }\n  }\n}",
+      "parentId": 1400,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1500,
+      "x": 800,
+      "y": 100,
+      "title": "Phase 5: Google Maps",
+      "description": "Map integration with custom markers",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["phase", "maps"],
+      "notes": "Weeks 5-6\nCore map functionality\nCustom workflow-colored markers\nAddress search\nUser location",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1501,
+      "x": 650,
+      "y": 50,
+      "title": "Maps SDK Setup",
+      "description": "Configure Google Maps SDK and API key",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["maps", "setup"],
+      "notes": "1. Google Cloud Console:\n  - Create project\n  - Enable Maps SDK for Android\n  - Enable Places API\n  - Enable Geocoding API\n  - Create API key\n  - Restrict key to Android app\n\n2. AndroidManifest.xml:\n  <meta-data\n    android:name=\"com.google.android.geo.API_KEY\"\n    android:value=\"${MAPS_API_KEY}\" />\n\n3. Add permissions:\n  ACCESS_FINE_LOCATION\n  ACCESS_COARSE_LOCATION\n\n4. Add dependencies:\n  implementation 'com.google.maps.android:maps-compose:4.3.0'\n  implementation 'com.google.android.gms:play-services-maps:18.2.0'\n  implementation 'com.google.android.gms:play-services-location:21.1.0'\n  implementation 'com.google.android.libraries.places:places:3.3.0'",
+      "parentId": 1500,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1502,
+      "x": 650,
+      "y": 150,
+      "title": "Main Map Screen",
+      "description": "Primary map view with GoogleMap Compose",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["maps", "ui"],
+      "notes": "@Composable\nfun MapScreen(\n  viewModel: MapViewModel = hiltViewModel()\n) {\n  val leads by viewModel.leads.collectAsState()\n  val cameraPositionState = rememberCameraPositionState {\n    position = CameraPosition.fromLatLngZoom(defaultLocation, 12f)\n  }\n  \n  Box(Modifier.fillMaxSize()) {\n    GoogleMap(\n      modifier = Modifier.fillMaxSize(),\n      cameraPositionState = cameraPositionState,\n      properties = MapProperties(\n        isMyLocationEnabled = true,\n        mapType = MapType.NORMAL\n      )\n    ) {\n      leads.forEach { lead ->\n        CustomMarker(\n          lead = lead,\n          onClick = { viewModel.selectLead(lead) }\n        )\n      }\n    }\n    \n    // Search bar overlay\n    AddressSearchBar(\n      modifier = Modifier.align(Alignment.TopCenter)\n    )\n    \n    // Selected lead card\n    selectedLead?.let { lead ->\n      LeadBottomSheet(lead)\n    }\n  }\n}",
+      "parentId": 1500,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1503,
+      "x": 650,
+      "y": 250,
+      "title": "Custom Map Markers",
+      "description": "Workflow-colored markers for leads",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["maps", "ui"],
+      "notes": "@Composable\nfun CustomMarker(\n  lead: Lead,\n  onClick: () -> Unit\n) {\n  val markerColor = when(lead.workflowStage) {\n    WorkflowStage.LEAD -> BitmapDescriptorFactory.HUE_BLUE\n    WorkflowStage.PROPOSAL -> BitmapDescriptorFactory.HUE_ORANGE\n    WorkflowStage.WORK_ORDER -> BitmapDescriptorFactory.HUE_GREEN\n    WorkflowStage.INVOICE -> BitmapDescriptorFactory.HUE_RED\n    WorkflowStage.COMPLETED -> BitmapDescriptorFactory.HUE_VIOLET\n  }\n  \n  Marker(\n    state = MarkerState(position = LatLng(lead.latitude, lead.longitude)),\n    title = lead.customerName,\n    snippet = lead.address,\n    icon = BitmapDescriptorFactory.defaultMarker(markerColor),\n    onClick = {\n      onClick()\n      true\n    }\n  )\n}\n\nOR create custom marker bitmaps with Compose:\nfun createCustomMarkerBitmap(color: Color, stage: String): BitmapDescriptor",
+      "parentId": 1500,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1504,
+      "x": 650,
+      "y": 350,
+      "title": "Address Search",
+      "description": "Places autocomplete for address search",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["maps", "feature"],
+      "notes": "@Composable\nfun AddressSearchBar(\n  onPlaceSelected: (Place) -> Unit,\n  modifier: Modifier = Modifier\n) {\n  var query by remember { mutableStateOf(\"\") }\n  val placesClient = remember { Places.createClient(context) }\n  var predictions by remember { mutableStateOf<List<AutocompletePrediction>>(emptyList()) }\n  \n  LaunchedEffect(query) {\n    if (query.length > 2) {\n      val request = FindAutocompletePredictionsRequest.builder()\n        .setQuery(query)\n        .build()\n      \n      placesClient.findAutocompletePredictions(request)\n        .addOnSuccessListener { response ->\n          predictions = response.autocompletePredictions\n        }\n    }\n  }\n  \n  Column(modifier) {\n    OutlinedTextField(\n      value = query,\n      onValueChange = { query = it },\n      placeholder = { Text(\"Search address...\") },\n      leadingIcon = { Icon(Icons.Default.Search) }\n    )\n    \n    LazyColumn {\n      items(predictions) { prediction ->\n        PredictionItem(\n          prediction = prediction,\n          onClick = { \n            // Fetch place details and select\n            onPlaceSelected(it)\n          }\n        )\n      }\n    }\n  }\n}",
+      "parentId": 1500,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1505,
+      "x": 650,
+      "y": 450,
+      "title": "User Location Tracking",
+      "description": "Track and display user's current location",
+      "status": "pending",
+      "priority": "medium",
+      "tags": ["maps", "feature"],
+      "notes": "class LocationManager @Inject constructor(\n  @ApplicationContext private val context: Context,\n  private val fusedLocationClient: FusedLocationProviderClient\n) {\n  fun getCurrentLocation(): Flow<Location?> = callbackFlow {\n    if (hasLocationPermission()) {\n      fusedLocationClient.lastLocation\n        .addOnSuccessListener { location ->\n          trySend(location)\n        }\n    }\n    awaitClose()\n  }\n  \n  fun observeLocationUpdates(): Flow<Location> = callbackFlow {\n    val locationRequest = LocationRequest.Builder(\n      Priority.PRIORITY_HIGH_ACCURACY,\n      10000L // 10 seconds\n    ).build()\n    \n    val locationCallback = object : LocationCallback() {\n      override fun onLocationResult(result: LocationResult) {\n        result.lastLocation?.let { trySend(it) }\n      }\n    }\n    \n    fusedLocationClient.requestLocationUpdates(\n      locationRequest,\n      locationCallback,\n      Looper.getMainLooper()\n    )\n    \n    awaitClose {\n      fusedLocationClient.removeLocationUpdates(locationCallback)\n    }\n  }\n}\n\nHandle permission requests\nShow user location on map\nAuto-zoom to user location",
+      "parentId": 1500,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1600,
+      "x": 800,
+      "y": 300,
+      "title": "Phase 6: Lead Management",
+      "description": "Complete lead workflow system",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["phase", "feature"],
+      "notes": "Weeks 6-8\n4-stage workflow implementation\nLead creation, editing, transitions\nComplete CRUD operations",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1601,
+      "x": 650,
+      "y": 550,
+      "title": "Add Lead Screen",
+      "description": "Form for creating new leads",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["feature", "ui"],
+      "notes": "@Composable\nfun AddLeadScreen(\n  viewModel: AddLeadViewModel = hiltViewModel(),\n  onLeadCreated: () -> Unit\n) {\n  val uiState by viewModel.uiState.collectAsState()\n  \n  Scaffold(\n    topBar = {\n      TopAppBar(\n        title = { Text(\"New Lead\") },\n        navigationIcon = { BackButton() },\n        actions = {\n          TextButton(onClick = viewModel::saveLead) {\n            Text(\"Save\")\n          }\n        }\n      )\n    }\n  ) { padding ->\n    LazyColumn(Modifier.padding(padding).padding(16.dp)) {\n      item { CustomerInfoSection() }\n      item { PropertyLocationSection() }\n      item { ServiceDetailsSection() }\n      item { SchedulingSection() }\n      item { NotesSection() }\n    }\n  }\n}\n\nSections:\n1. Customer Info (name, email, phone)\n2. Property Location (address with autocomplete)\n3. Service Details (types, priority, estimate)\n4. Scheduling (site visit date)\n5. Notes (additional info)",
+      "parentId": 1600,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1602,
+      "x": 650,
+      "y": 650,
+      "title": "Lead Detail Screen",
+      "description": "View and edit lead details",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["feature", "ui"],
+      "notes": "@Composable\nfun LeadDetailScreen(\n  leadId: String,\n  viewModel: LeadDetailViewModel = hiltViewModel()\n) {\n  val lead by viewModel.lead.collectAsState()\n  \n  Scaffold(\n    topBar = {\n      TopAppBar(\n        title = { Text(lead?.customerName ?: \"Lead\") },\n        actions = {\n          IconButton(onClick = viewModel::editLead) {\n            Icon(Icons.Default.Edit)\n          }\n          MoreActionsMenu()\n        }\n      )\n    },\n    floatingActionButton = {\n      WorkflowAdvanceFAB(\n        currentStage = lead?.workflowStage,\n        onAdvance = viewModel::advanceWorkflow\n      )\n    }\n  ) {\n    LazyColumn {\n      item { WorkflowStageIndicator(lead?.workflowStage) }\n      item { CustomerInfoCard(lead) }\n      item { PropertyLocationCard(lead) }\n      item { ServiceDetailsCard(lead) }\n      item { ScheduleCard(lead) }\n      item { NotesCard(lead) }\n      item { ActivityTimelineCard(lead) }\n    }\n  }\n}",
+      "parentId": 1600,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1603,
+      "x": 650,
+      "y": 750,
+      "title": "Workflow State Machine",
+      "description": "Manage workflow stage transitions",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["feature", "business-logic"],
+      "notes": "sealed class WorkflowAction {\n  object ConvertToProposal : WorkflowAction()\n  object AcceptProposal : WorkflowAction()\n  object CompleteWork : WorkflowAction()\n  object SendInvoice : WorkflowAction()\n  object MarkPaid : WorkflowAction()\n  object Reject : WorkflowAction()\n}\n\nclass WorkflowManager @Inject constructor(\n  private val leadRepository: LeadRepository\n) {\n  suspend fun executeAction(\n    leadId: String,\n    action: WorkflowAction\n  ): Result<Lead> {\n    return when(action) {\n      is ConvertToProposal -> {\n        // Validate lead has required info\n        // Update stage to PROPOSAL\n        // Create proposal document\n        leadRepository.updateWorkflowStage(leadId, WorkflowStage.PROPOSAL)\n      }\n      is AcceptProposal -> {\n        // Create work order\n        // Assign crew\n        // Update stage to WORK_ORDER\n      }\n      // ... other transitions\n    }\n  }\n  \n  fun getAvailableActions(stage: WorkflowStage): List<WorkflowAction> {\n    return when(stage) {\n      WorkflowStage.LEAD -> listOf(ConvertToProposal, Reject)\n      WorkflowStage.PROPOSAL -> listOf(AcceptProposal, Reject)\n      WorkflowStage.WORK_ORDER -> listOf(CompleteWork)\n      WorkflowStage.INVOICE -> listOf(MarkPaid)\n      WorkflowStage.COMPLETED -> emptyList()\n    }\n  }\n}",
+      "parentId": 1600,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1604,
+      "x": 850,
+      "y": 550,
+      "title": "Leads List Screen",
+      "description": "List view of all leads with filtering",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["feature", "ui"],
+      "notes": "@Composable\nfun LeadsListScreen(\n  viewModel: LeadsViewModel = hiltViewModel()\n) {\n  val leads by viewModel.leads.collectAsState()\n  val filterStage by viewModel.filterStage.collectAsState()\n  \n  Scaffold(\n    topBar = {\n      TopAppBar(\n        title = { Text(\"Leads\") },\n        actions = {\n          FilterChipRow(\n            selectedStage = filterStage,\n            onStageSelected = viewModel::setFilter\n          )\n        }\n      )\n    },\n    floatingActionButton = {\n      FloatingActionButton(onClick = { /* Navigate to add lead */ }) {\n        Icon(Icons.Default.Add)\n      }\n    }\n  ) {\n    LazyColumn {\n      items(leads) { lead ->\n        LeadCard(\n          lead = lead,\n          onClick = { /* Navigate to detail */ }\n        )\n      }\n    }\n  }\n}\n\nFeatures:\n- Filter by workflow stage\n- Search by customer name/address\n- Sort by date, value, priority\n- Swipe actions (archive, delete)\n- Pull to refresh",
+      "parentId": 1600,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1700,
+      "x": 200,
+      "y": 500,
+      "title": "Phase 7: Navigation",
+      "description": "App navigation and menu system",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["phase", "ui"],
+      "notes": "Week 8\nNavigation drawer\nBottom navigation\nDeep linking",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1701,
+      "x": 50,
+      "y": 850,
+      "title": "Navigation Graph",
+      "description": "Setup Compose Navigation with all routes",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["navigation"],
+      "notes": "sealed class Screen(val route: String) {\n  object Map : Screen(\"map\")\n  object LeadsList : Screen(\"leads\")\n  object LeadDetail : Screen(\"lead/{leadId}\")\n  object AddLead : Screen(\"lead/add\")\n  object Proposals : Screen(\"proposals\")\n  object WorkOrders : Screen(\"workorders\")\n  object Invoices : Screen(\"invoices\")\n  object Settings : Screen(\"settings\")\n  object Profile : Screen(\"profile\")\n}\n\n@Composable\nfun TreeShopNavGraph(\n  navController: NavHostController = rememberNavController()\n) {\n  NavHost(\n    navController = navController,\n    startDestination = Screen.Map.route\n  ) {\n    composable(Screen.Map.route) { MapScreen() }\n    composable(Screen.LeadsList.route) { LeadsListScreen() }\n    composable(\n      route = Screen.LeadDetail.route,\n      arguments = listOf(navArgument(\"leadId\") { type = NavType.StringType })\n    ) { backStackEntry ->\n      LeadDetailScreen(backStackEntry.arguments?.getString(\"leadId\")!!)\n    }\n    // ... other routes\n  }\n}",
+      "parentId": 1700,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1702,
+      "x": 50,
+      "y": 950,
+      "title": "Navigation Drawer",
+      "description": "3-tier menu system matching iOS",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["navigation", "ui"],
+      "notes": "@Composable\nfun AppDrawer(\n  currentRoute: String,\n  navigateToRoute: (String) -> Unit,\n  closeDrawer: () -> Unit\n) {\n  ModalDrawerSheet {\n    // User profile section\n    DrawerHeader()\n    \n    Divider()\n    \n    // Tier 1: Main sections\n    DrawerItem(\n      icon = Icons.Default.Map,\n      label = \"Map\",\n      selected = currentRoute == Screen.Map.route,\n      onClick = { navigateToRoute(Screen.Map.route) }\n    )\n    \n    // Tier 2: Workflow sections\n    ExpandableDrawerSection(\n      title = \"Workflow\",\n      items = listOf(\n        DrawerItem(\"Leads\", Screen.LeadsList.route),\n        DrawerItem(\"Proposals\", Screen.Proposals.route),\n        DrawerItem(\"Work Orders\", Screen.WorkOrders.route),\n        DrawerItem(\"Invoices\", Screen.Invoices.route)\n      )\n    )\n    \n    // Tier 3: Other sections\n    ExpandableDrawerSection(\n      title = \"Tools\",\n      items = listOf(\n        DrawerItem(\"Calendar\", Screen.Calendar.route),\n        DrawerItem(\"Reports\", Screen.Reports.route),\n        DrawerItem(\"Customers\", Screen.Customers.route)\n      )\n    )\n    \n    Divider()\n    \n    DrawerItem(\n      icon = Icons.Default.Settings,\n      label = \"Settings\",\n      onClick = { navigateToRoute(Screen.Settings.route) }\n    )\n  }\n}",
+      "parentId": 1700,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1800,
+      "x": 200,
+      "y": 700,
+      "title": "Phase 8: Authentication",
+      "description": "User authentication and session management",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["phase", "auth"],
+      "notes": "Week 9\nLogin/logout\nSession persistence\nBiometric auth",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1801,
+      "x": 50,
+      "y": 1050,
+      "title": "Login Screen",
+      "description": "Email/password authentication UI",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["auth", "ui"],
+      "notes": "@Composable\nfun LoginScreen(\n  viewModel: AuthViewModel = hiltViewModel(),\n  onLoginSuccess: () -> Unit\n) {\n  var email by remember { mutableStateOf(\"\") }\n  var password by remember { mutableStateOf(\"\") }\n  val authState by viewModel.authState.collectAsState()\n  \n  Column(\n    modifier = Modifier\n      .fillMaxSize()\n      .padding(24.dp),\n    horizontalAlignment = Alignment.CenterHorizontally,\n    verticalArrangement = Arrangement.Center\n  ) {\n    // Logo\n    Image(painterResource(R.drawable.logo), \"TreeShop\")\n    \n    Spacer(Modifier.height(32.dp))\n    \n    // Email field\n    OutlinedTextField(\n      value = email,\n      onValueChange = { email = it },\n      label = { Text(\"Email\") },\n      keyboardType = KeyboardType.Email\n    )\n    \n    // Password field\n    OutlinedTextField(\n      value = password,\n      onValueChange = { password = it },\n      label = { Text(\"Password\") },\n      visualTransformation = PasswordVisualTransformation()\n    )\n    \n    Spacer(Modifier.height(24.dp))\n    \n    // Login button\n    Button(\n      onClick = { viewModel.login(email, password) },\n      modifier = Modifier.fillMaxWidth()\n    ) {\n      Text(\"Sign In\")\n    }\n    \n    // Biometric login option\n    BiometricLoginButton()\n  }\n  \n  LaunchedEffect(authState) {\n    if (authState is AuthState.Authenticated) {\n      onLoginSuccess()\n    }\n  }\n}",
+      "parentId": 1800,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1802,
+      "x": 50,
+      "y": 1150,
+      "title": "Auth Repository",
+      "description": "Handle authentication logic",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["auth", "backend"],
+      "notes": "interface AuthRepository {\n  suspend fun login(email: String, password: String): Result<User>\n  suspend fun logout(): Result<Unit>\n  suspend fun getCurrentUser(): User?\n  fun isAuthenticated(): Flow<Boolean>\n  suspend fun refreshToken(): Result<String>\n}\n\nclass AuthRepositoryImpl @Inject constructor(\n  private val authApi: AuthApi,\n  private val dataStore: DataStore<Preferences>,\n  private val userDao: UserDao\n) : AuthRepository {\n  \n  override suspend fun login(email: String, password: String): Result<User> {\n    return try {\n      val response = authApi.login(LoginRequest(email, password))\n      \n      // Save token\n      dataStore.edit { prefs ->\n        prefs[TOKEN_KEY] = response.token\n      }\n      \n      // Save user locally\n      userDao.insertUser(response.user.toEntity())\n      \n      Result.success(response.user)\n    } catch (e: Exception) {\n      Result.failure(e)\n    }\n  }\n  \n  override fun isAuthenticated(): Flow<Boolean> {\n    return dataStore.data.map { prefs ->\n      prefs[TOKEN_KEY] != null\n    }\n  }\n}",
+      "parentId": 1800,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1900,
+      "x": 500,
+      "y": 500,
+      "title": "Phase 9: Offline Sync",
+      "description": "Offline-first with background sync",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["phase", "sync"],
+      "notes": "Weeks 9-10\nOffline queue\nBackground sync with WorkManager\nConflict resolution",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1901,
+      "x": 350,
+      "y": 750,
+      "title": "Sync Worker",
+      "description": "WorkManager for background sync",
+      "status": "pending",
+      "priority": "critical",
+      "tags": ["sync", "background"],
+      "notes": "class SyncWorker(\n  context: Context,\n  params: WorkerParameters,\n  private val leadRepository: LeadRepository,\n  private val syncQueue: SyncQueue\n) : CoroutineWorker(context, params) {\n  \n  override suspend fun doWork(): Result {\n    return try {\n      // Get pending sync items\n      val pendingItems = syncQueue.getPendingItems()\n      \n      pendingItems.forEach { item ->\n        when(item.type) {\n          SyncType.CREATE_LEAD -> {\n            leadRepository.syncCreateLead(item.leadId)\n          }\n          SyncType.UPDATE_LEAD -> {\n            leadRepository.syncUpdateLead(item.leadId)\n          }\n          SyncType.DELETE_LEAD -> {\n            leadRepository.syncDeleteLead(item.leadId)\n          }\n        }\n        \n        // Mark as synced\n        syncQueue.markSynced(item.id)\n      }\n      \n      // Pull latest from server\n      leadRepository.pullLatestLeads()\n      \n      Result.success()\n    } catch (e: Exception) {\n      if (runAttemptCount < 3) {\n        Result.retry()\n      } else {\n        Result.failure()\n      }\n    }\n  }\n}\n\n// Schedule periodic sync\nval syncRequest = PeriodicWorkRequestBuilder<SyncWorker>(\n  15, TimeUnit.MINUTES\n)\n  .setConstraints(\n    Constraints.Builder()\n      .setRequiredNetworkType(NetworkType.CONNECTED)\n      .build()\n  )\n  .build()\n\nWorkManager.getInstance(context)\n  .enqueueUniquePeriodicWork(\n    \"lead_sync\",\n    ExistingPeriodicWorkPolicy.KEEP,\n    syncRequest\n  )",
+      "parentId": 1900,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 1902,
+      "x": 350,
+      "y": 850,
+      "title": "Conflict Resolution",
+      "description": "Handle sync conflicts between local and remote",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["sync", "business-logic"],
+      "notes": "enum class ConflictStrategy {\n  SERVER_WINS,\n  CLIENT_WINS,\n  MERGE,\n  MANUAL\n}\n\nclass ConflictResolver @Inject constructor() {\n  \n  suspend fun resolve(\n    local: Lead,\n    remote: Lead,\n    strategy: ConflictStrategy = ConflictStrategy.MERGE\n  ): Lead {\n    return when(strategy) {\n      ConflictStrategy.SERVER_WINS -> remote\n      \n      ConflictStrategy.CLIENT_WINS -> local\n      \n      ConflictStrategy.MERGE -> {\n        // Merge strategy: Take latest field-by-field\n        Lead(\n          id = local.id,\n          customerName = if (local.updatedAt > remote.updatedAt) \n            local.customerName else remote.customerName,\n          // ... merge other fields based on timestamps\n          workflowStage = remote.workflowStage, // Server wins on critical fields\n          updatedAt = maxOf(local.updatedAt, remote.updatedAt)\n        )\n      }\n      \n      ConflictStrategy.MANUAL -> {\n        // Show UI for user to manually resolve\n        throw ConflictRequiresManualResolutionException(local, remote)\n      }\n    }\n  }\n}",
+      "parentId": 1900,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 2000,
+      "x": 500,
+      "y": 700,
+      "title": "Phase 10: Advanced Features",
+      "description": "Additional features and polish",
+      "status": "pending",
+      "priority": "medium",
+      "tags": ["phase", "features"],
+      "notes": "Weeks 11-12\nNotifications\nCalendar integration\nPhoto capture\nReports",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 2001,
+      "x": 350,
+      "y": 950,
+      "title": "Push Notifications",
+      "description": "Firebase Cloud Messaging for notifications",
+      "status": "pending",
+      "priority": "medium",
+      "tags": ["notifications", "feature"],
+      "notes": "Setup FCM:\n1. Add Firebase to project\n2. Download google-services.json\n3. Add FCM dependency\n\nNotification types:\n- New lead assigned\n- Upcoming site visit\n- Proposal accepted\n- Payment received\n- Crew messages\n\nclass NotificationHandler @Inject constructor() {\n  fun createNotificationChannel(context: Context) {\n    val channel = NotificationChannel(\n      CHANNEL_ID,\n      \"TreeShop Notifications\",\n      NotificationManager.IMPORTANCE_HIGH\n    )\n    \n    val notificationManager = context.getSystemService(\n      NotificationManager::class.java\n    )\n    notificationManager.createNotificationChannel(channel)\n  }\n  \n  fun showLeadNotification(lead: Lead) {\n    val notification = NotificationCompat.Builder(context, CHANNEL_ID)\n      .setSmallIcon(R.drawable.ic_notification)\n      .setContentTitle(\"New Lead: ${lead.customerName}\")\n      .setContentText(lead.address)\n      .setPriority(NotificationCompat.PRIORITY_HIGH)\n      .setAutoCancel(true)\n      .setContentIntent(createLeadPendingIntent(lead.id))\n      .build()\n    \n    notificationManager.notify(lead.id.hashCode(), notification)\n  }\n}",
+      "parentId": 2000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 2002,
+      "x": 350,
+      "y": 1050,
+      "title": "Photo Capture",
+      "description": "Camera integration for site photos",
+      "status": "pending",
+      "priority": "medium",
+      "tags": ["camera", "feature"],
+      "notes": "@Composable\nfun PhotoCaptureButton(\n  onPhotoCaptured: (Uri) -> Unit\n) {\n  val context = LocalContext.current\n  var photoUri by remember { mutableStateOf<Uri?>(null) }\n  \n  val cameraLauncher = rememberLauncherForActivityResult(\n    ActivityResultContracts.TakePicture()\n  ) { success ->\n    if (success && photoUri != null) {\n      onPhotoCaptured(photoUri!!)\n    }\n  }\n  \n  val permissionLauncher = rememberLauncherForActivityResult(\n    ActivityResultContracts.RequestPermission()\n  ) { granted ->\n    if (granted) {\n      photoUri = createImageUri(context)\n      cameraLauncher.launch(photoUri!!)\n    }\n  }\n  \n  IconButton(\n    onClick = {\n      permissionLauncher.launch(Manifest.permission.CAMERA)\n    }\n  ) {\n    Icon(Icons.Default.Camera, \"Take Photo\")\n  }\n}\n\nFeatures:\n- Capture before/after photos\n- Attach photos to leads\n- Compress and upload\n- Gallery view",
+      "parentId": 2000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 2003,
+      "x": 650,
+      "y": 850,
+      "title": "Calendar Integration",
+      "description": "Schedule site visits and jobs",
+      "status": "pending",
+      "priority": "medium",
+      "tags": ["calendar", "feature"],
+      "notes": "@Composable\nfun CalendarScreen(\n  viewModel: CalendarViewModel = hiltViewModel()\n) {\n  val events by viewModel.events.collectAsState()\n  var selectedDate by remember { mutableStateOf(LocalDate.now()) }\n  \n  Column {\n    // Month calendar view\n    CalendarView(\n      selectedDate = selectedDate,\n      onDateSelected = { selectedDate = it },\n      eventDates = events.map { it.date }\n    )\n    \n    // Events for selected date\n    LazyColumn {\n      items(events.filter { it.date == selectedDate }) { event ->\n        EventCard(\n          event = event,\n          onClick = { /* Navigate to lead */ }\n        )\n      }\n    }\n  }\n}\n\nEvent types:\n- Site visits\n- Work scheduled\n- Follow-up calls\n- Crew availability\n\nIntegrate with device calendar",
+      "parentId": 2000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 2100,
+      "x": 800,
+      "y": 500,
+      "title": "Phase 11: Testing & QA",
+      "description": "Comprehensive testing suite",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["phase", "testing"],
+      "notes": "Week 13\nUnit tests\nIntegration tests\nUI tests\nPerformance testing",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 2101,
+      "x": 650,
+      "y": 950,
+      "title": "Unit Tests",
+      "description": "Test repositories, ViewModels, use cases",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["testing"],
+      "notes": "class LeadRepositoryTest {\n  @Mock lateinit var leadDao: LeadDao\n  @Mock lateinit var leadApi: LeadApi\n  \n  private lateinit var repository: LeadRepository\n  \n  @Before\n  fun setup() {\n    MockitoAnnotations.openMocks(this)\n    repository = LeadRepositoryImpl(leadDao, leadApi)\n  }\n  \n  @Test\n  fun `createLead should insert to database`() = runTest {\n    val lead = createTestLead()\n    \n    repository.createLead(lead)\n    \n    verify(leadDao).insertLead(any())\n  }\n  \n  @Test\n  fun `getLeadsByStage should filter correctly`() = runTest {\n    val leads = listOf(\n      createTestLead(stage = WorkflowStage.LEAD),\n      createTestLead(stage = WorkflowStage.PROPOSAL)\n    )\n    whenever(leadDao.getLeadsByStageFlow(WorkflowStage.LEAD))\n      .thenReturn(flowOf(leads.filter { it.stage == WorkflowStage.LEAD }))\n    \n    val result = repository.getLeadsByStage(WorkflowStage.LEAD).first()\n    \n    assertEquals(1, result.size)\n    assertEquals(WorkflowStage.LEAD, result[0].stage)\n  }\n}\n\nTest coverage:\n- Repositories: 80%+\n- ViewModels: 80%+\n- Use cases: 90%+\n- Utilities: 90%+",
+      "parentId": 2100,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 2102,
+      "x": 650,
+      "y": 1050,
+      "title": "UI Tests",
+      "description": "Compose UI testing with Espresso",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["testing", "ui"],
+      "notes": "@RunWith(AndroidJUnit4::class)\nclass LeadDetailScreenTest {\n  @get:Rule\n  val composeTestRule = createAndroidComposeRule<MainActivity>()\n  \n  @Test\n  fun leadDetailScreen_displaysLeadInfo() {\n    val testLead = createTestLead(\n      customerName = \"John Doe\",\n      address = \"123 Main St\"\n    )\n    \n    composeTestRule.setContent {\n      LeadDetailScreen(lead = testLead)\n    }\n    \n    composeTestRule\n      .onNodeWithText(\"John Doe\")\n      .assertIsDisplayed()\n    \n    composeTestRule\n      .onNodeWithText(\"123 Main St\")\n      .assertIsDisplayed()\n  }\n  \n  @Test\n  fun clickAdvanceWorkflow_updatesStage() {\n    // Test workflow advancement\n    composeTestRule\n      .onNodeWithText(\"Convert to Proposal\")\n      .performClick()\n    \n    composeTestRule\n      .onNodeWithText(\"PROPOSAL\")\n      .assertIsDisplayed()\n  }\n}\n\nTest scenarios:\n- All screens render correctly\n- Navigation works\n- Forms validate input\n- Actions trigger correct behavior",
+      "parentId": 2100,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 2200,
+      "x": 800,
+      "y": 700,
+      "title": "Phase 12: Release",
+      "description": "Production build and Play Store release",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["phase", "release"],
+      "notes": "Week 14\nProduction build\nPlay Store listing\nRelease",
+      "parentId": 1000,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 2201,
+      "x": 650,
+      "y": 1150,
+      "title": "Production Build Config",
+      "description": "Configure ProGuard and release signing",
+      "status": "pending",
+      "priority": "high",
+      "tags": ["release", "build"],
+      "notes": "build.gradle:\n\nandroid {\n  signingConfigs {\n    release {\n      storeFile file(\"../keystore/treeshop-release.jks\")\n      storePassword System.getenv(\"KEYSTORE_PASSWORD\")\n      keyAlias \"treeshop\"\n      keyPassword System.getenv(\"KEY_PASSWORD\")\n    }\n  }\n  \n  buildTypes {\n    release {\n      minifyEnabled true\n      shrinkResources true\n      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\n      signingConfig signingConfigs.release\n    }\n  }\n}\n\nProGuard rules:\n- Keep Room entities\n- Keep Retrofit interfaces\n- Keep serialization classes\n- Keep Compose classes",
+      "parentId": 2200,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+
+    {
+      "id": 2202,
+      "x": 850,
+      "y": 850,
+      "title": "Play Store Listing",
+      "description": "Create Play Store assets and listing",
+      "status": "pending",
+      "priority": "medium",
+      "tags": ["release", "marketing"],
+      "notes": "Required assets:\n- App icon (512x512)\n- Feature graphic (1024x500)\n- Screenshots (4-8 images)\n  - Phone screenshots (1080x1920)\n  - Tablet screenshots (1536x2048)\n- Video (optional but recommended)\n\nListing content:\n- Title: TreeShop - Tree Care Business\n- Short description (80 chars)\n- Full description (4000 chars)\n- Category: Business\n- Content rating: Everyone\n- Privacy policy URL\n- Contact email\n\nKeywords:\n- tree service\n- tree care\n- business management\n- field service\n- arborist\n- tree removal\n- landscaping",
+      "parentId": 2200,
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    }
+  ],
+  "connections": [
+    { "from": 1000, "to": 1100 },
+    { "from": 1000, "to": 1200 },
+    { "from": 1000, "to": 1300 },
+    { "from": 1000, "to": 1400 },
+    { "from": 1000, "to": 1500 },
+    { "from": 1000, "to": 1600 },
+    { "from": 1000, "to": 1700 },
+    { "from": 1000, "to": 1800 },
+    { "from": 1000, "to": 1900 },
+    { "from": 1000, "to": 2000 },
+    { "from": 1000, "to": 2100 },
+    { "from": 1000, "to": 2200 },
+
+    { "from": 1100, "to": 1101 },
+    { "from": 1100, "to": 1102 },
+    { "from": 1100, "to": 1103 },
+    { "from": 1100, "to": 1104 },
+
+    { "from": 1200, "to": 1201 },
+    { "from": 1200, "to": 1202 },
+    { "from": 1200, "to": 1203 },
+    { "from": 1200, "to": 1204 },
+
+    { "from": 1300, "to": 1301 },
+    { "from": 1300, "to": 1302 },
+    { "from": 1300, "to": 1303 },
+
+    { "from": 1400, "to": 1401 },
+    { "from": 1400, "to": 1402 },
+    { "from": 1400, "to": 1403 },
+    { "from": 1400, "to": 1404 },
+
+    { "from": 1500, "to": 1501 },
+    { "from": 1500, "to": 1502 },
+    { "from": 1500, "to": 1503 },
+    { "from": 1500, "to": 1504 },
+    { "from": 1500, "to": 1505 },
+
+    { "from": 1600, "to": 1601 },
+    { "from": 1600, "to": 1602 },
+    { "from": 1600, "to": 1603 },
+    { "from": 1600, "to": 1604 },
+
+    { "from": 1700, "to": 1701 },
+    { "from": 1700, "to": 1702 },
+
+    { "from": 1800, "to": 1801 },
+    { "from": 1800, "to": 1802 },
+
+    { "from": 1900, "to": 1901 },
+    { "from": 1900, "to": 1902 },
+
+    { "from": 2000, "to": 2001 },
+    { "from": 2000, "to": 2002 },
+    { "from": 2000, "to": 2003 },
+
+    { "from": 2100, "to": 2101 },
+    { "from": 2100, "to": 2102 },
+
+    { "from": 2200, "to": 2201 },
+    { "from": 2200, "to": 2202 }
+  ],
+  "version": "2.0.0",
+  "lastModified": "2025-10-05T00:00:00.000Z"
+}
