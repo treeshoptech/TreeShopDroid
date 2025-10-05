@@ -1,0 +1,58 @@
+/* TacticalDivider Component Styles */
+
+.tactical-divider {
+  font-family: 'Courier New', 'Consolas', monospace;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0;
+  width: 100%;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 255, 65, 0.2);
+  position: relative;
+}
+
+.divider-line.full {
+  flex: none;
+  width: 100%;
+}
+
+.divider-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(0, 255, 65, 0.7);
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.label-bracket {
+  color: rgba(0, 255, 65, 0.4);
+  font-size: 13px;
+}
+
+/* SOLID VARIANT (default) */
+.divider-solid .divider-line {
+  background: rgba(0, 255, 65, 0.2);
+}
+
+/* DASHED VARIANT */
+.divider-dashed .divider-line {
+  background: transparent;
+  border-top: 1px dashed rgba(0, 255, 65, 0.3);
+  height: 0;
+}
+
+/* DOTTED VARIANT */
+.divider-dotted .divider-line {
+  background: transparent;
+  border-top: 1px dotted rgba(0, 255, 65, 0.3);
+  height: 0;
+}

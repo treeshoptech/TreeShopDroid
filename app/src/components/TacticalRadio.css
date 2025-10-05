@@ -1,0 +1,75 @@
+/* TacticalRadio Component Styles */
+
+.tactical-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-family: 'Courier New', 'Consolas', monospace;
+  user-select: none;
+  margin-right: 20px;
+}
+
+.tactical-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 255, 65, 0.4);
+  border-radius: 50%;
+  background: rgba(0, 255, 65, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.radio-label {
+  color: rgba(0, 255, 65, 0.8);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Hover */
+.tactical-radio:hover .radio-circle {
+  border-color: rgba(0, 255, 65, 0.6);
+  background: rgba(0, 255, 65, 0.1);
+}
+
+/* Checked */
+.tactical-radio input:checked + .radio-circle {
+  border-color: #00ff41;
+  background: rgba(0, 255, 65, 0.15);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.tactical-radio input:checked + .radio-circle .radio-dot {
+  background: #00ff41;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+}
+
+/* Disabled */
+.tactical-radio.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tactical-radio.disabled:hover .radio-circle {
+  border-color: rgba(0, 255, 65, 0.4);
+  background: rgba(0, 255, 65, 0.05);
+}

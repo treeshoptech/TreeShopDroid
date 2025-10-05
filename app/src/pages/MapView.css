@@ -1,0 +1,504 @@
+/* MapView Page Styles */
+
+.map-view-container {
+  min-height: 100vh;
+  background: #0a0a0a;
+  padding: 24px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Header */
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.map-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #00ff41;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-bracket {
+  color: rgba(0, 255, 65, 0.4);
+  font-size: 32px;
+}
+
+.map-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.6);
+  text-transform: uppercase;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Map Controls */
+.map-controls {
+  width: 100%;
+}
+
+.controls-header {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #00ff41;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-bracket {
+  color: rgba(0, 255, 65, 0.4);
+  font-size: 16px;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+}
+
+/* Map Content */
+.map-content {
+  width: 100%;
+  flex: 1;
+}
+
+.map-viewport {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background: rgba(0, 255, 65, 0.02);
+  border: 2px solid rgba(0, 255, 65, 0.2);
+  overflow: hidden;
+}
+
+/* Map Grid */
+.map-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.3;
+}
+
+.grid-row {
+  flex: 1;
+  display: flex;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+}
+
+.grid-row:last-child {
+  border-bottom: none;
+}
+
+.grid-cell {
+  flex: 1;
+  border-right: 1px solid rgba(0, 255, 65, 0.1);
+}
+
+.grid-cell:last-child {
+  border-right: none;
+}
+
+/* Map Pins */
+.map-pins {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.map-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 10;
+}
+
+.pin-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 0 6px currentColor);
+  transition: all 0.2s;
+}
+
+.map-pin:hover .pin-icon {
+  font-size: 32px;
+  filter: drop-shadow(0 0 12px currentColor);
+}
+
+.map-pin.selected .pin-icon {
+  font-size: 36px;
+  filter: drop-shadow(0 0 16px currentColor);
+  animation: pinBounce 0.5s ease-out;
+}
+
+@keyframes pinBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.map-pin.pulse .pin-icon {
+  animation: pinPulse 1.5s infinite;
+}
+
+@keyframes pinPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.pin-alert {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 18px;
+  height: 18px;
+  background: #ff4136;
+  border: 2px solid #0a0a0a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  animation: alertPulse 1s infinite;
+}
+
+@keyframes alertPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 65, 54, 0.7);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 6px rgba(255, 65, 54, 0);
+  }
+}
+
+/* Coordinate Grid Labels */
+.map-coordinates {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.coord-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  display: flex;
+  background: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+.coord-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.7);
+  border-right: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+.coord-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(0, 255, 65, 0.6);
+  letter-spacing: 1px;
+}
+
+/* Map Legend */
+.map-legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.legend-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.7);
+  text-transform: uppercase;
+}
+
+.legend-items {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.legend-icon {
+  font-size: 16px;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.legend-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Location Details Panel */
+.location-details {
+  width: 100%;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #00ff41;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.6);
+  text-transform: uppercase;
+}
+
+.detail-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: #00ff41;
+  letter-spacing: 0.5px;
+  text-align: right;
+}
+
+.detail-value.coordinates {
+  font-size: 11px;
+  font-family: 'Courier New', 'Consolas', monospace;
+}
+
+.details-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.details-actions button {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* Map Statistics */
+.map-stats {
+  width: 100%;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.6);
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #00ff41;
+  letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .map-viewport {
+    height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .map-view-container {
+    padding: 16px;
+  }
+
+  .map-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .map-title {
+    font-size: 20px;
+  }
+
+  .filter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .map-viewport {
+    height: 400px;
+  }
+
+  .legend-items {
+    gap: 12px;
+  }
+
+  .legend-item {
+    font-size: 10px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+
+  .details-actions {
+    flex-direction: column;
+  }
+
+  .details-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-viewport {
+    height: 350px;
+  }
+
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .legend-items {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pin-icon {
+    font-size: 20px;
+  }
+
+  .map-pin:hover .pin-icon {
+    font-size: 24px;
+  }
+
+  .map-pin.selected .pin-icon {
+    font-size: 28px;
+  }
+}

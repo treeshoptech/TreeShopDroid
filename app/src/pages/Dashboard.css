@@ -1,0 +1,418 @@
+/* Dashboard Page Styles */
+
+.dashboard-container {
+  min-height: 100vh;
+  background: #0a0a0a;
+  padding: 24px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dashboard-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #00ff41;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-bracket {
+  color: rgba(0, 255, 65, 0.4);
+  font-size: 32px;
+}
+
+.dashboard-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.6);
+  text-transform: uppercase;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.metric-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.metric-icon {
+  font-size: 36px;
+  color: #00ff41;
+  width: 48px;
+  text-align: center;
+}
+
+.metric-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #00ff41;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.6);
+  text-transform: uppercase;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #00ff41;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-bracket {
+  color: rgba(0, 255, 65, 0.4);
+  font-size: 16px;
+}
+
+/* Workflow Pipeline */
+.workflow-stages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.workflow-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stage-name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.7);
+}
+
+.stage-count {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00ff41;
+  letter-spacing: 1px;
+}
+
+/* Content Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+/* Activity List */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(0, 255, 65, 0.02);
+  border: 1px solid rgba(0, 255, 65, 0.1);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.activity-item:hover {
+  background: rgba(0, 255, 65, 0.05);
+  border-color: rgba(0, 255, 65, 0.2);
+}
+
+.activity-icon {
+  font-size: 24px;
+  color: #00ff41;
+  width: 32px;
+  text-align: center;
+}
+
+.activity-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.activity-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #00ff41;
+  letter-spacing: 0.5px;
+}
+
+.activity-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: rgba(0, 255, 65, 0.6);
+}
+
+.activity-customer {
+  color: rgba(0, 255, 65, 0.7);
+}
+
+.activity-time {
+  color: rgba(0, 255, 65, 0.5);
+}
+
+/* Jobs List */
+.jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.job-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(0, 255, 65, 0.02);
+  border: 1px solid rgba(0, 255, 65, 0.1);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.job-item:hover {
+  background: rgba(0, 255, 65, 0.05);
+  border-color: rgba(0, 255, 65, 0.2);
+}
+
+.job-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+}
+
+.date-day {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00ff41;
+  line-height: 1;
+}
+
+.date-month {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgba(0, 255, 65, 0.7);
+}
+
+.job-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.job-time {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(0, 255, 65, 0.6);
+  letter-spacing: 1px;
+}
+
+.job-service {
+  font-size: 13px;
+  font-weight: 700;
+  color: #00ff41;
+  letter-spacing: 0.5px;
+}
+
+.job-customer {
+  font-size: 11px;
+  color: rgba(0, 255, 65, 0.7);
+}
+
+/* Card Actions */
+.card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Quick Actions */
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Revenue Summary */
+.revenue-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.revenue-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.revenue-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.6);
+  text-transform: uppercase;
+}
+
+.revenue-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #00ff41;
+  letter-spacing: 1px;
+}
+
+.revenue-value.large {
+  font-size: 36px;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
+.revenue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 16px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .dashboard-title {
+    font-size: 20px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .workflow-stages {
+    grid-template-columns: 1fr;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .revenue-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-value {
+    font-size: 24px;
+  }
+
+  .revenue-value.large {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-item,
+  .job-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .job-date {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+  }
+}

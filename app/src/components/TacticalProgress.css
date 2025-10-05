@@ -1,0 +1,107 @@
+/* TacticalProgress Component Styles */
+
+.tactical-progress-container {
+  font-family: 'Courier New', 'Consolas', monospace;
+  width: 100%;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.7);
+  text-transform: uppercase;
+}
+
+.progress-percentage {
+  font-size: 13px;
+  font-weight: 700;
+  color: #00ff41;
+  letter-spacing: 1px;
+}
+
+.tactical-progress {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  background: rgba(0, 255, 65, 0.05);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 65, 0.3) 0%,
+    rgba(0, 255, 65, 0.5) 50%,
+    rgba(0, 255, 65, 0.3) 100%
+  );
+  border-right: 2px solid #00ff41;
+  transition: width 0.3s ease-out;
+  z-index: 2;
+}
+
+.progress-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 255, 65, 0.4) 100%
+  );
+  animation: slideGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes slideGlow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.progress-segments {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 1;
+}
+
+.segment {
+  flex: 1;
+  border-right: 1px solid rgba(0, 255, 65, 0.1);
+}
+
+.segment:last-child {
+  border-right: none;
+}
+
+/* Different states based on value */
+.tactical-progress-container:has(.progress-bar[style*="width: 100%"]) .progress-bar {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 65, 0.5) 0%,
+    rgba(0, 255, 65, 0.7) 50%,
+    rgba(0, 255, 65, 0.5) 100%
+  );
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}

@@ -1,0 +1,158 @@
+/* TacticalBadge Component Styles */
+
+.tactical-badge {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 6px 12px;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 0 100%);
+  transition: all 0.2s;
+}
+
+/* COUNT VARIANT */
+.tactical-badge-count {
+  background: rgba(0, 255, 65, 0.15);
+  color: #00ff41;
+  border: 1px solid rgba(0, 255, 65, 0.4);
+  min-width: 32px;
+  font-size: 12px;
+}
+
+.tactical-badge-count:hover {
+  background: rgba(0, 255, 65, 0.25);
+  border-color: #00ff41;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+/* STATUS BADGES */
+.tactical-badge-status {
+  border: 1px solid;
+  position: relative;
+}
+
+.tactical-badge-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+  display: inline-block;
+}
+
+/* Lead Status */
+.status-lead {
+  background: rgba(255, 153, 0, 0.1);
+  border-color: rgba(255, 153, 0, 0.4);
+  color: #ff9100;
+}
+
+.status-lead::before {
+  background: #ff9100;
+  box-shadow: 0 0 8px rgba(255, 153, 0, 0.6);
+}
+
+/* Proposal Status */
+.status-proposal {
+  background: rgba(0, 191, 255, 0.1);
+  border-color: rgba(0, 191, 255, 0.4);
+  color: #00bfff;
+}
+
+.status-proposal::before {
+  background: #00bfff;
+  box-shadow: 0 0 8px rgba(0, 191, 255, 0.6);
+}
+
+/* Work Order Status */
+.status-workorder {
+  background: rgba(138, 43, 226, 0.1);
+  border-color: rgba(138, 43, 226, 0.4);
+  color: #8a2be2;
+}
+
+.status-workorder::before {
+  background: #8a2be2;
+  box-shadow: 0 0 8px rgba(138, 43, 226, 0.6);
+}
+
+/* Invoice Status */
+.status-invoice {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.4);
+  color: #ffd700;
+}
+
+.status-invoice::before {
+  background: #ffd700;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+/* Completed Status */
+.status-completed {
+  background: rgba(0, 255, 65, 0.1);
+  border-color: rgba(0, 255, 65, 0.4);
+  color: #00ff41;
+}
+
+.status-completed::before {
+  background: #00ff41;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+}
+
+/* PRIORITY BADGES */
+.tactical-badge-priority {
+  border: 1px solid;
+  font-weight: 800;
+}
+
+/* Low Priority */
+.priority-low {
+  background: rgba(100, 100, 100, 0.1);
+  border-color: rgba(150, 150, 150, 0.4);
+  color: #999;
+}
+
+/* Medium Priority */
+.priority-medium {
+  background: rgba(0, 191, 255, 0.1);
+  border-color: rgba(0, 191, 255, 0.4);
+  color: #00bfff;
+}
+
+/* High Priority */
+.priority-high {
+  background: rgba(255, 153, 0, 0.1);
+  border-color: rgba(255, 153, 0, 0.4);
+  color: #ff9100;
+}
+
+/* Critical Priority */
+.priority-critical {
+  background: rgba(255, 65, 54, 0.1);
+  border-color: rgba(255, 65, 54, 0.4);
+  color: #ff4136;
+  animation: pulse-critical 2s infinite;
+}
+
+@keyframes pulse-critical {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 65, 54, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 65, 54, 0.6);
+  }
+}
+
+/* Hover States */
+.tactical-badge-status:hover,
+.tactical-badge-priority:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}

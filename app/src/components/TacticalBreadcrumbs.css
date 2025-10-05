@@ -1,0 +1,50 @@
+/* TacticalBreadcrumbs Component Styles */
+
+.tactical-breadcrumbs {
+  font-family: 'Courier New', 'Consolas', monospace;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 0;
+}
+
+.breadcrumb-item-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumb-item {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(0, 255, 65, 0.6);
+  text-decoration: none;
+  transition: all 0.2s;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.breadcrumb-item:not(.active) {
+  cursor: pointer;
+}
+
+.breadcrumb-item:not(.active):hover {
+  color: #00ff41;
+  background: rgba(0, 255, 65, 0.1);
+}
+
+.breadcrumb-item.active {
+  color: #00ff41;
+  font-weight: 700;
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 0 100%);
+}
+
+.breadcrumb-separator {
+  color: rgba(0, 255, 65, 0.3);
+  font-size: 12px;
+  font-weight: 700;
+}

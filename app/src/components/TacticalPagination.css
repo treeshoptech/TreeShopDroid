@@ -1,0 +1,57 @@
+/* TacticalPagination Component Styles */
+
+.tactical-pagination {
+  font-family: 'Courier New', 'Consolas', monospace;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  background: rgba(0, 255, 65, 0.05);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  color: rgba(0, 255, 65, 0.8);
+  cursor: pointer;
+  transition: all 0.2s;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+}
+
+.page-btn:hover:not(:disabled):not(.active) {
+  background: rgba(0, 255, 65, 0.1);
+  border-color: rgba(0, 255, 65, 0.4);
+  color: #00ff41;
+}
+
+.page-btn.active {
+  background: rgba(0, 255, 65, 0.2);
+  border-color: #00ff41;
+  color: #00ff41;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.page-btn.nav-btn {
+  min-width: 80px;
+  text-transform: uppercase;
+}
+
+.page-ellipsis {
+  color: rgba(0, 255, 65, 0.4);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+}

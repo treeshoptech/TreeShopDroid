@@ -1,0 +1,170 @@
+/* TacticalSpinner Component Styles */
+
+.tactical-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Courier New', 'Consolas', monospace;
+}
+
+.tactical-spinner {
+  position: relative;
+  display: inline-block;
+}
+
+.spinner-ring {
+  position: absolute;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  border-top-color: #00ff41;
+  animation: spin 1.5s linear infinite;
+}
+
+.spinner-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  background: #00ff41;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 5px rgba(0, 255, 65, 0.4);
+  }
+}
+
+.spinner-label {
+  color: rgba(0, 255, 65, 0.8);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* SMALL SIZE */
+.spinner-small .tactical-spinner {
+  width: 24px;
+  height: 24px;
+}
+
+.spinner-small .spinner-ring:nth-child(1) {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation-duration: 1.2s;
+}
+
+.spinner-small .spinner-ring:nth-child(2) {
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  animation-duration: 1.5s;
+  animation-direction: reverse;
+  border-top-color: rgba(0, 255, 65, 0.6);
+}
+
+.spinner-small .spinner-ring:nth-child(3) {
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  animation-duration: 1.8s;
+  border-top-color: rgba(0, 255, 65, 0.3);
+}
+
+/* MEDIUM SIZE */
+.spinner-medium .tactical-spinner {
+  width: 40px;
+  height: 40px;
+}
+
+.spinner-medium .spinner-ring:nth-child(1) {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation-duration: 1.2s;
+}
+
+.spinner-medium .spinner-ring:nth-child(2) {
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  animation-duration: 1.5s;
+  animation-direction: reverse;
+  border-top-color: rgba(0, 255, 65, 0.6);
+}
+
+.spinner-medium .spinner-ring:nth-child(3) {
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  animation-duration: 1.8s;
+  border-top-color: rgba(0, 255, 65, 0.3);
+}
+
+/* LARGE SIZE */
+.spinner-large .tactical-spinner {
+  width: 64px;
+  height: 64px;
+}
+
+.spinner-large .spinner-ring:nth-child(1) {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation-duration: 1.2s;
+  border-width: 3px;
+}
+
+.spinner-large .spinner-ring:nth-child(2) {
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  animation-duration: 1.5s;
+  animation-direction: reverse;
+  border-top-color: rgba(0, 255, 65, 0.6);
+  border-width: 3px;
+}
+
+.spinner-large .spinner-ring:nth-child(3) {
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  animation-duration: 1.8s;
+  border-top-color: rgba(0, 255, 65, 0.3);
+  border-width: 3px;
+}
+
+.spinner-large .spinner-core {
+  width: 6px;
+  height: 6px;
+}

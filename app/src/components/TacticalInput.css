@@ -1,0 +1,117 @@
+/* TacticalInput Component Styles */
+
+.tactical-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.tactical-label {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.7);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.label-bracket {
+  color: rgba(0, 255, 65, 0.4);
+  font-size: 12px;
+}
+
+.tactical-field-wrapper {
+  position: relative;
+}
+
+.tactical-field {
+  width: 100%;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 16px;
+  background: rgba(0, 255, 65, 0.03);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  color: #00ff41;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  transition: all 0.2s;
+}
+
+.tactical-field::placeholder {
+  color: rgba(0, 255, 65, 0.3);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.tactical-field:focus {
+  outline: none;
+  background: rgba(0, 255, 65, 0.08);
+  border-color: rgba(0, 255, 65, 0.5);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+}
+
+.tactical-field:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Textarea Specific */
+.tactical-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Select Specific */
+.tactical-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300ff41' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+}
+
+.tactical-select option {
+  background: #0a0a0a;
+  color: #00ff41;
+  padding: 8px;
+}
+
+/* Corner Accent */
+.field-corner {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid rgba(0, 255, 65, 0.4);
+  border-right: 2px solid rgba(0, 255, 65, 0.4);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  pointer-events: none;
+  transition: all 0.2s;
+}
+
+.tactical-field:focus ~ .field-corner {
+  border-color: #00ff41;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
+/* Hover States */
+.tactical-field:hover:not(:disabled) {
+  border-color: rgba(0, 255, 65, 0.4);
+}
+
+/* Error State (optional) */
+.tactical-input-group.error .tactical-field {
+  border-color: #ff4136;
+  background: rgba(255, 65, 54, 0.05);
+}
+
+.tactical-input-group.error .tactical-label {
+  color: #ff4136;
+}

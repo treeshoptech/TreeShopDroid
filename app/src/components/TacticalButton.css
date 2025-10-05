@@ -1,0 +1,101 @@
+/* TacticalButton Component Styles */
+
+.tactical-btn {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 12px 24px;
+  border: 2px solid;
+  background: transparent;
+  color: #00ff41;
+  cursor: pointer;
+  transition: all 0.2s;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+}
+
+.tactical-btn:hover:not(.disabled) {
+  background: rgba(0, 255, 65, 0.1);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+  transform: translateY(-2px);
+}
+
+.tactical-btn:active:not(.disabled) {
+  transform: translateY(0);
+}
+
+.tactical-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* PRIMARY VARIANT */
+.tactical-btn-primary {
+  border-color: #00ff41;
+  background: rgba(0, 255, 65, 0.05);
+}
+
+.tactical-btn-primary:hover:not(.disabled) {
+  background: rgba(0, 255, 65, 0.15);
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+}
+
+/* SECONDARY VARIANT */
+.tactical-btn-secondary {
+  border-color: rgba(0, 255, 65, 0.4);
+  color: rgba(0, 255, 65, 0.8);
+}
+
+.tactical-btn-secondary:hover:not(.disabled) {
+  border-color: #00ff41;
+  color: #00ff41;
+}
+
+/* ICON VARIANT */
+.tactical-btn-icon {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  justify-content: center;
+  font-size: 20px;
+  border-color: rgba(0, 255, 65, 0.3);
+}
+
+.tactical-btn-icon:hover:not(.disabled) {
+  border-color: #00ff41;
+}
+
+/* Button Brackets */
+.btn-bracket {
+  font-size: 16px;
+  opacity: 0.6;
+}
+
+.btn-content {
+  flex: 1;
+  text-align: center;
+}
+
+/* Active State Animation */
+.tactical-btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: rgba(0, 255, 65, 0.1);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.tactical-btn-primary:hover::after:not(.disabled) {
+  opacity: 1;
+}

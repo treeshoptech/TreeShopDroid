@@ -1,0 +1,245 @@
+/* Help Page Styles */
+
+.help-container {
+  min-height: 100vh;
+  background: #0a0a0a;
+  padding: 24px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Header */
+.help-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.help-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #00ff41;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-bracket {
+  color: rgba(0, 255, 65, 0.4);
+  font-size: 32px;
+}
+
+.help-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.6);
+  text-transform: uppercase;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #00ff41;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-bracket {
+  color: rgba(0, 255, 65, 0.4);
+  font-size: 16px;
+}
+
+/* Quick Links */
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.quick-link-card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(0, 255, 65, 0.05);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  transition: all 0.2s;
+}
+
+.quick-link-card:hover {
+  background: rgba(0, 255, 65, 0.1);
+  border-color: rgba(0, 255, 65, 0.4);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.2);
+}
+
+.quick-link-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #00ff41;
+  background: rgba(0, 255, 65, 0.1);
+  border: 2px solid rgba(0, 255, 65, 0.3);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.quick-link-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.quick-link-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #00ff41;
+  text-transform: uppercase;
+}
+
+.quick-link-desc {
+  font-size: 11px;
+  color: rgba(0, 255, 65, 0.7);
+  line-height: 1.4;
+}
+
+/* FAQ List */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-answer {
+  font-size: 13px;
+  color: rgba(0, 255, 65, 0.8);
+  line-height: 1.6;
+  margin: 0;
+  padding: 16px 0 0 0;
+}
+
+/* No Results */
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 12px;
+}
+
+.no-results-icon {
+  font-size: 64px;
+  color: rgba(0, 255, 65, 0.3);
+  font-weight: 700;
+}
+
+.no-results-text {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(0, 255, 65, 0.5);
+  text-transform: uppercase;
+}
+
+.no-results-desc {
+  font-size: 12px;
+  color: rgba(0, 255, 65, 0.4);
+  letter-spacing: 0.5px;
+}
+
+/* Support Info */
+.support-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.support-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+}
+
+.support-item:last-child {
+  border-bottom: none;
+}
+
+.support-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 65, 0.6);
+  text-transform: uppercase;
+}
+
+.support-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #00ff41;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .help-container {
+    padding: 16px;
+  }
+
+  .help-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .help-title {
+    font-size: 20px;
+  }
+
+  .quick-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-link-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .no-results-icon {
+    font-size: 48px;
+  }
+}

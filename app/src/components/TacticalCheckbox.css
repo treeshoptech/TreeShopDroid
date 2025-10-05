@@ -1,0 +1,68 @@
+/* TacticalCheckbox Component Styles */
+
+.tactical-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-family: 'Courier New', 'Consolas', monospace;
+  user-select: none;
+}
+
+.tactical-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 255, 65, 0.4);
+  background: rgba(0, 255, 65, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 0 100%);
+  position: relative;
+}
+
+.checkbox-check {
+  color: #00ff41;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.checkbox-label {
+  color: rgba(0, 255, 65, 0.8);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Hover */
+.tactical-checkbox:hover .checkbox-box {
+  border-color: rgba(0, 255, 65, 0.6);
+  background: rgba(0, 255, 65, 0.1);
+}
+
+/* Checked */
+.tactical-checkbox input:checked + .checkbox-box {
+  border-color: #00ff41;
+  background: rgba(0, 255, 65, 0.15);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+/* Disabled */
+.tactical-checkbox.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tactical-checkbox.disabled:hover .checkbox-box {
+  border-color: rgba(0, 255, 65, 0.4);
+  background: rgba(0, 255, 65, 0.05);
+}
