@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TreeShop Development Mind Map - Visual Project Planning">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>TreeShop Dev Mind Map</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABNUlEQVR4nO2WPU7DQBCFP4QoKCiRKJAoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKChQQEFBQUFBQUFBQYECBQUFBQUFBQUFCjRIFLuzXtt7a5sI8aRPtmd3Zt6sZxKJf40JYAVoAQfAK/AJvAEXwDqwCMwC08AUMAksAPPADLAELAOrwBqwDmwAm8AWsA3sALvAHrAP7AO7wB6wD+wDB8AhcAQcA8fACXAKnAFnwDlwAVwCl8AVcAVcA9fADXAL3AF3wD1wD9wD98ADcA88Ag/AI/AEPAMvwCvwBrwC78AH8Al8AV/AF/ANfAM/wA/wC/wCf8Av8Av8Ar/AL/ALhIAIEAEiQASIABEgAkSACBABIkAEiAARIAJEgAgQASJABIgAESACRIAIEAEiQASIABEgAkSACBABIkD8Jb4B7cRHjQ==">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="logo">🌳 TreeShop Mind Map</h1>
+            <span class="project-name" id="projectName">TreeShopDroid Development</span>
+        </div>
+        <div class="header-right">
+            <button class="btn-icon" id="searchBtn" title="Search">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </button>
+            <button class="btn-icon" id="filterBtn" title="Filter">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+            </button>
+            <button class="btn-icon" id="exportBtn" title="Export">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+            </button>
+            <button class="btn-icon" id="importBtn" title="Import">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+            </button>
+            <button class="btn-icon" id="settingsBtn" title="Settings">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M12 1v6m0 6v6m6.36-15.36l-4.24 4.24m-4.24 4.24l-4.24 4.24M23 12h-6m-6 0H1m15.36 6.36l-4.24-4.24m-4.24-4.24l-4.24-4.24"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Node Details</h2>
+                <button class="btn-close" id="closeSidebar">&times;</button>
+            </div>
+
+            <div class="sidebar-content" id="sidebarContent">
+                <div class="empty-state">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                    <p>Select a node to view details</p>
+                </div>
+            </div>
+
+            <div class="sidebar-footer" id="sidebarFooter" style="display: none;">
+                <button class="btn btn-danger" id="deleteNodeBtn">Delete Node</button>
+                <button class="btn btn-primary" id="saveNodeBtn">Save Changes</button>
+            </div>
+        </aside>
+
+        <!-- Canvas Area -->
+        <main class="canvas-area">
+            <div class="canvas-controls">
+                <button class="btn btn-primary" id="addRootNodeBtn">+ Add Root Node</button>
+                <button class="btn btn-secondary" id="addChildNodeBtn" disabled>+ Add Child Node</button>
+                <button class="btn btn-secondary" id="toggleCompleteBtn" disabled>Toggle Complete</button>
+                <div class="view-controls">
+                    <button class="btn-icon" id="zoomInBtn" title="Zoom In">+</button>
+                    <button class="btn-icon" id="resetViewBtn" title="Reset View">⊙</button>
+                    <button class="btn-icon" id="zoomOutBtn" title="Zoom Out">−</button>
+                </div>
+            </div>
+
+            <canvas id="mindMapCanvas"></canvas>
+
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-label">Total Nodes:</span>
+                    <span class="stat-value" id="totalNodes">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Completed:</span>
+                    <span class="stat-value" id="completedNodes">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">In Progress:</span>
+                    <span class="stat-value" id="inProgressNodes">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Progress:</span>
+                    <span class="stat-value" id="progressPercent">0%</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Node Editing -->
+    <div class="modal" id="nodeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Edit Node</h2>
+                <button class="btn-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="nodeTitle">Title *</label>
+                    <input type="text" id="nodeTitle" placeholder="Enter node title" required>
+                </div>
+                <div class="form-group">
+                    <label for="nodeDescription">Description</label>
+                    <textarea id="nodeDescription" rows="4" placeholder="Enter detailed description"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nodeStatus">Status</label>
+                        <select id="nodeStatus">
+                            <option value="pending">Pending</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                            <option value="blocked">Blocked</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nodePriority">Priority</label>
+                        <select id="nodePriority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nodeTags">Tags (comma separated)</label>
+                    <input type="text" id="nodeTags" placeholder="e.g., frontend, android, feature">
+                </div>
+                <div class="form-group">
+                    <label for="nodeNotes">Technical Notes</label>
+                    <textarea id="nodeNotes" rows="6" placeholder="Implementation details, dependencies, code snippets, etc."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelModalBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveModalBtn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Input file for import (hidden) -->
+    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+
+    <!-- Scripts -->
+    <script src="storage.js"></script>
+    <script src="mindmap.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
