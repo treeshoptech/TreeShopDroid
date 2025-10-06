@@ -5,40 +5,76 @@ import TacticalBadge from '../components/TacticalBadge'
 import TacticalButton from '../components/TacticalButton'
 import TacticalProgress from '../components/TacticalProgress'
 import TacticalDivider from '../components/TacticalDivider'
+import { useLeads, useProposals, useWorkOrders, useInvoices, useCurrentUser } from '../hooks/useConvex'
 
 const Dashboard = () => {
-  // Mock data - in real app, this would come from API/database
+  const leads = useLeads()
+  const proposals = useProposals()
+  const workOrders = useWorkOrders()
+  const invoices = useInvoices()
+  const currentUser = useCurrentUser()
+
+  // Real-time stats from Convex
   const stats = {
-    activeJobs: 28,
-    totalRevenue: 125430,
-    revenueThisMonth: 12500,
-    pendingLeads: 12,
-    activeProposals: 8,
-    scheduledWorkOrders: 5,
-    unpaidInvoices: 3,
-    completedJobs: 142
+    pendingLeads: leads?.filter(l => l.status === 'new' || l.status === 'contacted').length || 0,
+    activeProposals: proposals?.filter(p => p.status === 'sent' || p.status === 'viewed').length || 0,
+    scheduledWorkOrders: workOrders?.filter(w => w.status === 'scheduled' || w.status === 'in_progress').length || 0,
+    unpaidInvoices: invoices?.filter(i => i.status === 'sent' || i.status === 'overdue').length || 0,
+    totalLeads: leads?.length || 0,
+    totalProposals: proposals?.length || 0,
+    totalWorkOrders: workOrders?.length || 0,
+    totalInvoices: invoices?.length || 0,
+    totalRevenue: invoices?.filter(i => i.status === 'paid').reduce((sum, inv) => sum + inv.total, 0) || 0,
+    completedJobs: workOrders?.filter(w => w.status === 'completed').length || 0
   }
 
+  // Recent activity (most recent 5 items)
   const recentActivity = [
-    { id: 1, type: 'lead', title: 'New Lead - Oak Tree Removal', customer: 'John Smith', time: '15 min ago', status: 'lead' },
-    { id: 2, type: 'proposal', title: 'Proposal Sent - Pine Trimming', customer: 'Sarah Johnson', time: '1 hour ago', status: 'proposal' },
-    { id: 3, type: 'workorder', title: 'Work Order Completed', customer: 'Mike Davis', time: '2 hours ago', status: 'workorder' },
-    { id: 4, type: 'invoice', title: 'Invoice Paid - $2,450', customer: 'Lisa Brown', time: '3 hours ago', status: 'invoice' },
-    { id: 5, type: 'lead', title: 'New Lead - Emergency Storm Damage', customer: 'Tom Wilson', time: '4 hours ago', status: 'lead' }
-  ]
+    ...(leads?.slice(0, 2).map(l => ({
+      id: l._id,
+      type: 'lead',
+      title: `New Lead - ${l.serviceType[0] || 'Service Request'}`,
+      customer: 'Lead',
+      time: new Date(l.createdAt).toLocaleString(),
+      status: 'lead'
+    })) || []),
+    ...(proposals?.slice(0, 2).map(p => ({
+      id: p._id,
+      type: 'proposal',
+      title: `Proposal ${p.proposalNumber}`,
+      customer: 'Customer',
+      time: new Date(p.createdAt).toLocaleString(),
+      status: 'proposal'
+    })) || []),
+    ...(invoices?.slice(0, 1).map(i => ({
+      id: i._id,
+      type: 'invoice',
+      title: `Invoice ${i.invoiceNumber} - $${i.total.toFixed(2)}`,
+      customer: 'Customer',
+      time: new Date(i.createdAt).toLocaleString(),
+      status: 'invoice'
+    })) || [])
+  ].slice(0, 5)
 
-  const upcomingJobs = [
-    { id: 1, date: '2025-10-06', time: '08:00', customer: 'Robert Martinez', service: 'Oak Tree Removal', status: 'workorder' },
-    { id: 2, date: '2025-10-06', time: '13:00', customer: 'Jennifer Lee', service: 'Stump Grinding', status: 'workorder' },
-    { id: 3, date: '2025-10-07', time: '09:00', customer: 'David Anderson', service: 'Tree Trimming', status: 'workorder' },
-    { id: 4, date: '2025-10-07', time: '14:00', customer: 'Emily Taylor', service: 'Land Clearing', status: 'workorder' }
-  ]
+  // Upcoming jobs (next 4 scheduled work orders)
+  const upcomingJobs = workOrders?.filter(w => w.status === 'scheduled')
+    .sort((a, b) => a.scheduledDate - b.scheduledDate)
+    .slice(0, 4)
+    .map(w => ({
+      id: w._id,
+      date: new Date(w.scheduledDate).toLocaleDateString(),
+      time: new Date(w.scheduledDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      customer: 'Customer',
+      service: w.services[0]?.name || 'Service',
+      status: 'workorder'
+    })) || []
 
+  // Workflow metrics with real data
   const workflowMetrics = [
-    { stage: 'LEADS', count: 12, color: '#2196f3', progress: 65 },
-    { stage: 'PROPOSALS', count: 8, color: '#ff9100', progress: 45 },
-    { stage: 'WORK ORDERS', count: 5, color: '#00ff41', progress: 80 },
-    { stage: 'INVOICES', count: 3, color: '#ff4136', progress: 35 }
+    { stage: 'LEADS', count: stats.pendingLeads, total: stats.totalLeads, color: '#2196f3', progress: stats.totalLeads ? (stats.pendingLeads / stats.totalLeads * 100) : 0 },
+    { stage: 'PROPOSALS', count: stats.activeProposals, total: stats.totalProposals, color: '#ff9100', progress: stats.totalProposals ? (stats.activeProposals / stats.totalProposals * 100) : 0 },
+    { stage: 'WORK ORDERS', count: stats.scheduledWorkOrders, total: stats.totalWorkOrders, color: '#00ff41', progress: stats.totalWorkOrders ? (stats.scheduledWorkOrders / stats.totalWorkOrders * 100) : 0 },
+    { stage: 'INVOICES', count: stats.unpaidInvoices, total: stats.totalInvoices, color: '#ff4136', progress: stats.totalInvoices ? (stats.unpaidInvoices / stats.totalInvoices * 100) : 0 }
   ]
 
   const getActivityIcon = (type) => {
@@ -74,7 +110,7 @@ const Dashboard = () => {
           <div className="metric-card">
             <div className="metric-icon">◉</div>
             <div className="metric-content">
-              <div className="metric-value">{stats.activeJobs}</div>
+              <div className="metric-value">{stats.scheduledWorkOrders}</div>
               <div className="metric-label">ACTIVE JOBS</div>
             </div>
           </div>
@@ -84,8 +120,8 @@ const Dashboard = () => {
           <div className="metric-card">
             <div className="metric-icon">$</div>
             <div className="metric-content">
-              <div className="metric-value">${(stats.revenueThisMonth / 1000).toFixed(1)}K</div>
-              <div className="metric-label">REVENUE MTD</div>
+              <div className="metric-value">${(stats.totalRevenue / 1000).toFixed(1)}K</div>
+              <div className="metric-label">TOTAL REVENUE</div>
             </div>
           </div>
         </TacticalCard>
@@ -110,6 +146,13 @@ const Dashboard = () => {
           </div>
         </TacticalCard>
       </div>
+
+      {/* Loading State */}
+      {!leads && (
+        <div style={{ textAlign: 'center', padding: '40px', color: '#00ff41' }}>
+          <div>LOADING DATA...</div>
+        </div>
+      )}
 
       {/* Workflow Pipeline */}
       <TacticalCard>
