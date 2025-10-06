@@ -68,6 +68,74 @@
   box-shadow: none !important;
 }
 
+/* Force Clerk inputs to be visible */
+.cl-rootBox,
+.cl-card,
+.cl-main,
+.cl-form,
+.cl-formButtonPrimary {
+  background: transparent !important;
+}
+
+.cl-formFieldInput,
+.cl-input {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #000 !important;
+  border: 1px solid #00ff00 !important;
+  padding: 12px !important;
+  border-radius: 4px !important;
+}
+
+.cl-formFieldInput:focus,
+.cl-input:focus {
+  outline: 2px solid #00ff00 !important;
+  background: #fff !important;
+}
+
+.cl-formFieldLabel,
+.cl-formFieldLabelRow label {
+  color: #00ff00 !important;
+  font-weight: 600 !important;
+}
+
+.cl-footerActionLink,
+.cl-identityPreviewText,
+.cl-formHeaderTitle,
+.cl-formHeaderSubtitle,
+.cl-headerTitle,
+.cl-headerSubtitle {
+  color: #fff !important;
+}
+
+.cl-formButtonPrimary {
+  background: #00ff00 !important;
+  color: #000 !important;
+  border: none !important;
+  font-weight: 700 !important;
+  padding: 12px !important;
+  border-radius: 4px !important;
+}
+
+.cl-formButtonPrimary:hover {
+  background: #00dd00 !important;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5) !important;
+}
+
+.cl-dividerRow,
+.cl-dividerText {
+  color: #888 !important;
+}
+
+.cl-socialButtonsBlockButton {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid #00ff00 !important;
+  color: #fff !important;
+}
+
+.cl-internal-b3fm6y {
+  color: #fff !important;
+}
+
 /* Toggle Button */
 .auth-toggle {
   margin-top: 20px;

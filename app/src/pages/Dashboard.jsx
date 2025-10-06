@@ -14,6 +14,29 @@ const Dashboard = () => {
   const invoices = useInvoices()
   const currentUser = useCurrentUser()
 
+  // Show setup message if user doesn't exist
+  if (currentUser === undefined) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#0a0a0a',
+        color: '#00ff00',
+        padding: '40px',
+        textAlign: 'center',
+        fontFamily: 'monospace'
+      }}>
+        <div>
+          <div style={{ fontSize: '48px', marginBottom: '20px' }}>🌲</div>
+          <h1 style={{ fontSize: '32px', marginBottom: '20px' }}>LOADING...</h1>
+          <p style={{ color: '#888' }}>Initializing your account...</p>
+        </div>
+      </div>
+    )
+  }
+
   // Real-time stats from Convex
   const stats = {
     pendingLeads: leads?.filter(l => l.status === 'new' || l.status === 'contacted').length || 0,

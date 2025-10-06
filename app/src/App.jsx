@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { UserButton } from '@clerk/clerk-react'
 import AuthGate from './components/AuthGate'
+import UserSetup from './components/UserSetup'
 import ComponentShowcase from './ComponentShowcase'
 import Dashboard from './pages/Dashboard'
 import MapView from './pages/MapView'
@@ -46,7 +47,8 @@ function App() {
 
   return (
     <AuthGate>
-      <div className="app">
+      <UserSetup>
+        <div className="app">
         {/* View Switcher */}
         <div className="view-switcher">
         <div className="user-button-wrapper">
@@ -143,7 +145,8 @@ function App() {
           onNavigate={handleNavigate}
           currentView={currentView}
         />
-      </div>
+        </div>
+      </UserSetup>
     </AuthGate>
   )
 }

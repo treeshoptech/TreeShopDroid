@@ -136,3 +136,9 @@ export function useUsers() {
 export function useOrganization() {
   return useQuery(api.functions.organizations.getCurrent);
 }
+
+// ========== ONBOARDING ==========
+
+export function useSetupNewUser() {
+  return useMutation(api.functions.onboarding.setupNewUser);
+}
