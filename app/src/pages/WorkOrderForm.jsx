@@ -7,58 +7,37 @@ import TacticalBadge from '../components/TacticalBadge'
 import TacticalDivider from '../components/TacticalDivider'
 import TacticalCheckbox from '../components/TacticalCheckbox'
 import TacticalRadio from '../components/TacticalRadio'
+import { useCreateWorkOrder, useCustomers, useUsers } from '../hooks/useConvex'
 
 const WorkOrderForm = ({ onSubmit, onCancel, proposalData = {} }) => {
+  const createWorkOrder = useCreateWorkOrder()
+  const customers = useCustomers()
+  const users = useUsers()
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     // Work Order Info
     workOrderNumber: `WO-${Date.now().toString().slice(-6)}`,
-    createdDate: new Date().toISOString().split('T')[0],
-
-    // Customer Info (from proposal)
-    customerName: proposalData.customerName || '',
-    propertyAddress: proposalData.propertyAddress || '',
-    phone: proposalData.phone || '',
+    customerId: proposalData.customerId || '',
+    proposalId: proposalData.proposalId || undefined,
 
     // Scheduling
     scheduledDate: '',
     scheduledTime: '',
-    estimatedDuration: '',
 
     // Crew Assignment
-    crewLeader: '',
     crewMembers: [],
-    crewSize: '2',
 
     // Equipment
     equipmentNeeded: [],
-    vehiclesAssigned: [],
 
     // Work Details
     serviceType: proposalData.lineItems?.[0]?.service || '',
     workDescription: proposalData.lineItems?.[0]?.description || '',
-    specialInstructions: '',
-    accessNotes: '',
-
-    // Safety & Compliance
-    safetyRequirements: [],
-    permitsRequired: false,
-    permitNumbers: '',
+    safetyNotes: '',
+    jobNotes: '',
 
     // Status
-    workOrderStatus: 'scheduled',
-    priority: 'normal',
-
-    // Work Area Details
-    propertyType: '',
-    treeCount: '',
-    estimatedArea: '',
-    terrainType: '',
-
-    // Pre-Job Checklist
-    preJobPhotosTaken: false,
-    customerWalkthroughComplete: false,
-    equipmentInspected: false,
-    safetyBriefingComplete: false
+    workOrderStatus: 'scheduled'
   })
 
   const crewMemberOptions = [
@@ -114,9 +93,40 @@ const WorkOrderForm = ({ onSubmit, onCancel, proposalData = {} }) => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    onSubmit && onSubmit(formData)
+    setIsSubmitting(true)
+
+    try {
+      const scheduledDateTime = new Date(`${formData.scheduledDate}T${formData.scheduledTime || '08:00'}`).getTime()
+
+      const workOrderId = await createWorkOrder({
+        customerId: formData.customerId,
+        proposalId: formData.proposalId,
+        workOrderNumber: formData.workOrderNumber,
+        status: formData.workOrderStatus,
+        scheduledDate: scheduledDateTime,
+        assignedCrew: formData.crewMembers,
+        services: [
+          {
+            name: formData.serviceType,
+            description: formData.workDescription,
+            completed: false,
+          }
+        ],
+        equipment: formData.equipmentNeeded,
+        safetyNotes: formData.safetyNotes,
+        jobNotes: formData.jobNotes,
+      })
+
+      onSubmit && onSubmit({ ...formData, workOrderId })
+      alert('✅ Work Order created successfully!')
+    } catch (error) {
+      console.error('Error creating work order:', error)
+      alert('❌ Error creating work order: ' + error.message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -497,14 +507,16 @@ const WorkOrderForm = ({ onSubmit, onCancel, proposalData = {} }) => {
             type="button"
             variant="secondary"
             onClick={onCancel}
+            disabled={isSubmitting}
           >
             CANCEL
           </TacticalButton>
           <TacticalButton
             type="submit"
             variant="primary"
+            disabled={isSubmitting}
           >
-            CREATE WORK ORDER
+            {isSubmitting ? 'CREATING...' : 'CREATE WORK ORDER'}
           </TacticalButton>
         </div>
       </form>

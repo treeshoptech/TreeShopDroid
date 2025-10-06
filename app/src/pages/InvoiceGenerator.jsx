@@ -6,42 +6,24 @@ import TacticalCard from '../components/TacticalCard'
 import TacticalBadge from '../components/TacticalBadge'
 import TacticalDivider from '../components/TacticalDivider'
 import TacticalProgress from '../components/TacticalProgress'
+import { useCreateInvoice, useCustomers } from '../hooks/useConvex'
 
 const InvoiceGenerator = ({ onSubmit, onCancel, workOrderData = {} }) => {
+  const createInvoice = useCreateInvoice()
+  const customers = useCustomers()
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     // Invoice Info
     invoiceNumber: `INV-${Date.now().toString().slice(-6)}`,
-    invoiceDate: new Date().toISOString().split('T')[0],
+    customerId: workOrderData.customerId || '',
+    workOrderId: workOrderData.workOrderId || undefined,
     dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
 
-    // Customer Info (from work order)
-    customerName: workOrderData.customerName || '',
-    propertyAddress: workOrderData.propertyAddress || '',
-    phone: workOrderData.phone || '',
-    email: workOrderData.email || '',
-
-    // Work Details
-    workOrderNumber: workOrderData.workOrderNumber || '',
-    serviceDate: workOrderData.scheduledDate || '',
-    serviceType: workOrderData.serviceType || '',
-
     // Financial
-    taxRate: 0,
-    discount: 0,
-    depositPaid: 0,
+    taxRate: 6.5,
 
     // Payment
-    paymentStatus: 'unpaid',
-    paymentMethod: '',
-    paymentTerms: 'Net 30',
-
-    // Notes
-    invoiceNotes: '',
-    paymentInstructions: 'Payment due within 30 days. Make checks payable to TreeShop.',
-
-    // Late Fees
-    lateFeePercent: 1.5,
-    gracePeriodDays: 5
+    paymentStatus: 'draft'
   })
 
   const [lineItems, setLineItems] = useState([
@@ -141,20 +123,41 @@ const InvoiceGenerator = ({ onSubmit, onCancel, workOrderData = {} }) => {
     return Math.min(100, (calculateTotalPaid() / total) * 100)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const invoiceData = {
-      ...formData,
-      lineItems,
-      payments,
-      subtotal: calculateSubtotal(),
-      tax: calculateTax(),
-      discount: calculateDiscount(),
-      total: calculateTotal(),
-      totalPaid: calculateTotalPaid(),
-      balance: calculateBalance()
+    setIsSubmitting(true)
+
+    try {
+      const subtotal = calculateSubtotal()
+      const taxAmount = calculateTax()
+      const total = calculateTotal()
+
+      const invoiceId = await createInvoice({
+        customerId: formData.customerId,
+        workOrderId: formData.workOrderId,
+        invoiceNumber: formData.invoiceNumber,
+        status: formData.paymentStatus,
+        dueDate: new Date(formData.dueDate).getTime(),
+        lineItems: lineItems.map(item => ({
+          description: item.description,
+          quantity: parseFloat(item.quantity) || 0,
+          rate: parseFloat(item.rate) || 0,
+          total: parseFloat(item.amount) || 0,
+        })),
+        subtotal,
+        taxRate: parseFloat(formData.taxRate) || 0,
+        taxAmount,
+        total,
+      })
+
+      onSubmit && onSubmit({ ...formData, invoiceId })
+      alert('✅ Invoice created successfully!')
+    } catch (error) {
+      console.error('Error creating invoice:', error)
+      alert('❌ Error creating invoice: ' + error.message)
+    } finally {
+      setIsSubmitting(false)
     }
-    onSubmit && onSubmit(invoiceData)
   }
 
   return (
@@ -546,14 +549,16 @@ const InvoiceGenerator = ({ onSubmit, onCancel, workOrderData = {} }) => {
             type="button"
             variant="secondary"
             onClick={onCancel}
+            disabled={isSubmitting}
           >
             CANCEL
           </TacticalButton>
           <TacticalButton
             type="submit"
             variant="primary"
+            disabled={isSubmitting}
           >
-            GENERATE INVOICE
+            {isSubmitting ? 'CREATING...' : 'GENERATE INVOICE'}
           </TacticalButton>
         </div>
       </form>

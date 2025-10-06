@@ -6,14 +6,15 @@ import TacticalCard from '../components/TacticalCard'
 import TacticalBadge from '../components/TacticalBadge'
 import TacticalDivider from '../components/TacticalDivider'
 import TacticalTable from '../components/TacticalTable'
+import { useCreateProposal, useCustomers } from '../hooks/useConvex'
 
 const ProposalBuilder = ({ onSubmit, onCancel, leadData = {} }) => {
+  const createProposal = useCreateProposal()
+  const customers = useCustomers()
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
-    // Customer Info (from lead)
-    customerName: leadData.customerName || '',
-    propertyAddress: leadData.propertyAddress || '',
-    phone: leadData.phone || '',
-    email: leadData.email || '',
+    // Customer
+    customerId: leadData.customerId || '',
 
     // Proposal Details
     proposalNumber: `PROP-${Date.now().toString().slice(-6)}`,
@@ -21,13 +22,13 @@ const ProposalBuilder = ({ onSubmit, onCancel, leadData = {} }) => {
     validUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
 
     // Financial
-    taxRate: 0,
+    taxRate: 6.5,
     discount: 0,
 
     // Terms
     paymentTerms: '50% deposit, balance on completion',
     notes: '',
-    termsAndConditions: 'Work to be completed in a professional manner. All debris to be removed from site. Customer responsible for clearing access to work area.'
+    terms: 'Work to be completed in a professional manner. All debris to be removed from site. Customer responsible for clearing access to work area.'
   })
 
   const [lineItems, setLineItems] = useState([
@@ -113,17 +114,44 @@ const ProposalBuilder = ({ onSubmit, onCancel, leadData = {} }) => {
     return calculateSubtotal() + calculateTax() - calculateDiscount()
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const proposalData = {
-      ...formData,
-      lineItems,
-      subtotal: calculateSubtotal(),
-      tax: calculateTax(),
-      discount: calculateDiscount(),
-      total: calculateTotal()
+    setIsSubmitting(true)
+
+    try {
+      const subtotal = calculateSubtotal()
+      const taxAmount = calculateTax()
+      const total = calculateTotal()
+
+      const proposalId = await createProposal({
+        customerId: formData.customerId,
+        proposalNumber: formData.proposalNumber,
+        status: 'draft',
+        validUntil: new Date(formData.validUntil).getTime(),
+        services: lineItems.map(item => ({
+          name: item.service,
+          description: item.description,
+          quantity: parseFloat(item.quantity) || 0,
+          unit: item.unit,
+          rate: parseFloat(item.rate) || 0,
+          total: parseFloat(item.amount) || 0,
+        })),
+        subtotal,
+        taxRate: parseFloat(formData.taxRate) || 0,
+        taxAmount,
+        total,
+        terms: formData.terms,
+        notes: formData.notes,
+      })
+
+      onSubmit && onSubmit({ ...formData, proposalId })
+      alert('✅ Proposal created successfully!')
+    } catch (error) {
+      console.error('Error creating proposal:', error)
+      alert('❌ Error creating proposal: ' + error.message)
+    } finally {
+      setIsSubmitting(false)
     }
-    onSubmit && onSubmit(proposalData)
   }
 
   return (
@@ -151,9 +179,11 @@ const ProposalBuilder = ({ onSubmit, onCancel, leadData = {} }) => {
 
           <div className="form-grid">
             <TacticalInput
-              label="Customer Name"
-              value={formData.customerName}
-              onChange={(e) => handleChange('customerName', e.target.value)}
+              label="Select Customer"
+              type="select"
+              value={formData.customerId}
+              onChange={(e) => handleChange('customerId', e.target.value)}
+              options={customers?.map(c => ({ value: c._id, label: `${c.name} - ${c.phone}` })) || []}
               required
             />
 
@@ -395,14 +425,16 @@ const ProposalBuilder = ({ onSubmit, onCancel, leadData = {} }) => {
             type="button"
             variant="secondary"
             onClick={onCancel}
+            disabled={isSubmitting}
           >
             CANCEL
           </TacticalButton>
           <TacticalButton
             type="submit"
             variant="primary"
+            disabled={isSubmitting}
           >
-            GENERATE PROPOSAL
+            {isSubmitting ? 'CREATING...' : 'GENERATE PROPOSAL'}
           </TacticalButton>
         </div>
       </form>
