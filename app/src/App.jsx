@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useUser } from '@clerk/clerk-react'
+import AuthGate from './components/AuthGate'
 import ComponentShowcase from './ComponentShowcase'
 import Dashboard from './pages/Dashboard'
 import MapView from './pages/MapView'
@@ -15,6 +17,7 @@ import TacticalNavMenu from './components/TacticalNavMenu'
 import './App.css'
 
 function App() {
+  const { user } = useUser()
   const [currentView, setCurrentView] = useState('dashboard') // 'dashboard', 'map', 'components', 'lead-form', 'proposal', 'work-order', 'invoice'
   const [isNavOpen, setIsNavOpen] = useState(false)
 
@@ -43,9 +46,10 @@ function App() {
   }
 
   return (
-    <div className="app">
-      {/* View Switcher */}
-      <div className="view-switcher">
+    <AuthGate>
+      <div className="app">
+        {/* View Switcher */}
+        <div className="view-switcher">
         <button
           className={currentView === 'dashboard' ? 'active' : ''}
           onClick={() => setCurrentView('dashboard')}
@@ -130,14 +134,15 @@ function App() {
         />
       )}
 
-      {/* Tactical Navigation Menu */}
-      <TacticalNavMenu
-        isOpen={isNavOpen}
-        onClose={() => setIsNavOpen(false)}
-        onNavigate={handleNavigate}
-        currentView={currentView}
-      />
-    </div>
+        {/* Tactical Navigation Menu */}
+        <TacticalNavMenu
+          isOpen={isNavOpen}
+          onClose={() => setIsNavOpen(false)}
+          onNavigate={handleNavigate}
+          currentView={currentView}
+        />
+      </div>
+    </AuthGate>
   )
 }
 

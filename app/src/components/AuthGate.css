@@ -1,0 +1,168 @@
+.auth-gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  padding: 20px;
+}
+
+.auth-gate.loading {
+  background: #0a0a0a;
+}
+
+.auth-container {
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Header */
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.logo-icon {
+  font-size: 48px;
+}
+
+.logo-text {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #00ff00;
+  text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.auth-subtitle {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #888;
+  font-weight: 600;
+}
+
+/* Form Container */
+.auth-form {
+  background: rgba(20, 20, 20, 0.8);
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Clerk Component Styling */
+.auth-clerk-root {
+  width: 100%;
+}
+
+.auth-clerk-card {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Toggle Button */
+.auth-toggle {
+  margin-top: 20px;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+
+.auth-toggle button {
+  background: none;
+  border: none;
+  color: #00ff00;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+  padding: 0;
+  margin-left: 5px;
+}
+
+.auth-toggle button:hover {
+  color: #00ff00;
+  text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+}
+
+/* Footer Features */
+.auth-footer {
+  margin-top: 40px;
+}
+
+.auth-features {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 12px;
+}
+
+.feature-icon {
+  font-size: 24px;
+}
+
+/* Loading Spinner */
+.tactical-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.spinner-ring {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #333;
+  border-top-color: #00ff00;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-text {
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: #00ff00;
+  font-weight: 600;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .auth-container {
+    max-width: 100%;
+  }
+
+  .logo-text {
+    font-size: 28px;
+  }
+
+  .auth-form {
+    padding: 20px;
+  }
+
+  .auth-features {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
