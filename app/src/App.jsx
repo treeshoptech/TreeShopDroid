@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useUser } from '@clerk/clerk-react'
+import { UserButton } from '@clerk/clerk-react'
 import AuthGate from './components/AuthGate'
 import ComponentShowcase from './ComponentShowcase'
 import Dashboard from './pages/Dashboard'
@@ -17,7 +17,6 @@ import TacticalNavMenu from './components/TacticalNavMenu'
 import './App.css'
 
 function App() {
-  const { user } = useUser()
   const [currentView, setCurrentView] = useState('dashboard') // 'dashboard', 'map', 'components', 'lead-form', 'proposal', 'work-order', 'invoice'
   const [isNavOpen, setIsNavOpen] = useState(false)
 
@@ -50,6 +49,9 @@ function App() {
       <div className="app">
         {/* View Switcher */}
         <div className="view-switcher">
+        <div className="user-button-wrapper">
+          <UserButton afterSignOutUrl="/" />
+        </div>
         <button
           className={currentView === 'dashboard' ? 'active' : ''}
           onClick={() => setCurrentView('dashboard')}
