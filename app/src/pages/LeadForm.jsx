@@ -6,8 +6,12 @@ import TacticalCard from '../components/TacticalCard'
 import TacticalBadge from '../components/TacticalBadge'
 import TacticalDivider from '../components/TacticalDivider'
 import TacticalCheckbox from '../components/TacticalCheckbox'
+import { useCreateLead, useCreateCustomer } from '../hooks/useConvex'
 
 const LeadForm = ({ onSubmit, onCancel, initialData = {} }) => {
+  const createLead = useCreateLead()
+  const createCustomer = useCreateCustomer()
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     // Customer Info
     customerName: initialData.customerName || '',
@@ -61,9 +65,44 @@ const LeadForm = ({ onSubmit, onCancel, initialData = {} }) => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    onSubmit && onSubmit(formData)
+    setIsSubmitting(true)
+
+    try {
+      // Step 1: Create customer first
+      const customerId = await createCustomer({
+        name: formData.customerName,
+        email: formData.email || undefined,
+        phone: formData.phone,
+        address: formData.propertyAddress,
+        city: formData.city,
+        state: formData.state,
+        zipCode: formData.zipCode,
+        propertyType: formData.propertyType || 'residential',
+        notes: `Lead source: ${formData.source}`,
+      })
+
+      // Step 2: Create lead with customer ID
+      const leadId = await createLead({
+        customerId,
+        status: 'new',
+        priority: formData.priority,
+        source: formData.source,
+        serviceType: formData.serviceType ? [formData.serviceType] : [],
+        description: formData.description || 'New lead inquiry',
+        estimatedValue: formData.estimatedTreeCount ? parseFloat(formData.estimatedTreeCount) * 500 : undefined,
+      })
+
+      // Success!
+      onSubmit && onSubmit({ ...formData, customerId, leadId })
+      alert('✅ Lead created successfully!')
+    } catch (error) {
+      console.error('Error creating lead:', error)
+      alert('❌ Error creating lead: ' + error.message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -241,14 +280,16 @@ const LeadForm = ({ onSubmit, onCancel, initialData = {} }) => {
             type="button"
             variant="secondary"
             onClick={onCancel}
+            disabled={isSubmitting}
           >
             CANCEL
           </TacticalButton>
           <TacticalButton
             type="submit"
             variant="primary"
+            disabled={isSubmitting}
           >
-            CREATE LEAD
+            {isSubmitting ? 'CREATING...' : 'CREATE LEAD'}
           </TacticalButton>
         </div>
       </form>
